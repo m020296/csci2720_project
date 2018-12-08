@@ -2,7 +2,7 @@
 
   <div id="app">
     
-    <v-toolbar dense fixed>
+    <v-toolbar dense fixed >
     <!-- <v-spacer></v-spacer> -->
     <v-toolbar-title>CSCI 2720 Project</v-toolbar-title>
 
@@ -14,8 +14,12 @@
       <v-btn flat to="/login">Login</v-btn>
       <v-btn flat to="/signup">Sign Up</v-btn>
     </v-toolbar-items>
-  </v-toolbar>
-
-    <router-view/>
+    </v-toolbar>
+    <br>
+    <br>
+    <br>
+    <main padding-top>
+      <router-view/>
+    </main>
   </div>
 </template>

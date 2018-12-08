@@ -1,6 +1,4 @@
 <template>
-
-
   <v-app>
     <v-content>
       <v-container fluid fill-height>
@@ -38,6 +36,11 @@
         data() {
             return {};
         },
-        methods: {}
+        methods: {
+            login: function(){
+                this.$router.replace('home');
+            }
+            
+        }
     }
 </script>
