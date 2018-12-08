@@ -1,28 +1,21 @@
 <template>
+
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    
+    <v-toolbar dense fixed>
+    <!-- <v-spacer></v-spacer> -->
+    <v-toolbar-title>CSCI 2720 Project</v-toolbar-title>
+
+    <v-spacer></v-spacer>
+    <v-toolbar-items>
+      
+      <v-btn flat to="/">Home</v-btn>
+      <v-btn flat to="/about">About</v-btn>
+      <v-btn flat to="/login">Login</v-btn>
+      <v-btn flat to="/signup">Sign Up</v-btn>
+    </v-toolbar-items>
+  </v-toolbar>
+
+    <router-view/>
   </div>
 </template>
-
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
-}
-</script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
