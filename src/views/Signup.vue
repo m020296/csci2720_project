@@ -68,6 +68,7 @@
 
 <script>
 import firebase from "firebase";
+import { db } from '../main'
 
 export default {
   name: "signUp",
@@ -87,13 +88,27 @@ export default {
         .createUserWithEmailAndPassword(this.email, this.password)
         .then(
           (user) => {
+              let uid = firebase.auth().currentUser.uid
+            console.log("add to db: " + this.userid + " " + uid + " " + this.email );
+            
+            db.collection('user').add({UID: uid, email: this.email, userid: this.userid, favEventId: []});
             this.$router.replace('welcome');
+            
             // alert("nice");
           },
           (err) => {
             alert("Oops. " + err.message);
           }
         );
+    },
+    addToDB: function() {
+        var name = this.name
+        var uid = "dkslanlds"
+        var email = this.email
+        
+
+        console.log("add to db: " + name + " " + uid + " " + email );
+        db.collection('user').add({uid,email, array: null, name});
     }
   }
 };

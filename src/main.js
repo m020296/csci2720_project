@@ -1,8 +1,12 @@
 import Vue from "vue";
 import "./plugins/vuetify";
-import firebase from "firebase";
+import firebase from "firebase/app";
 import App from "./App.vue";
 import router from "./router";
+import VueFirestore from 'vue-firestore';
+import VueFire from 'vuefire'
+import 'firebase/firestore'
+Vue.use(VueFire)
 
 var config = {
   apiKey: "AIzaSyBIjnXNtVGp_4K4wBKC4I3bF9uj17n0WfM",
@@ -14,6 +18,7 @@ var config = {
 };
 
 firebase.initializeApp(config);
+
 
 Vue.config.productionTip = false;
 
@@ -33,11 +38,9 @@ firebase
         render: h => h(App)
       }).$mount("#app");
     }
-    if(user){
-      console.log("login");
-      
-      
-    }else{
-      console.log("logout");
-    }
   });
+
+  const Firebase = firebase.firestore();
+  const settings = {/* your settings... */ timestampsInSnapshots: true};
+  Firebase.settings(settings);
+  export const db = Firebase
