@@ -23,20 +23,14 @@
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
-    </v-navigation-drawer> -->
-
+    </v-navigation-drawer>-->
     <!-- <v-toolbar color="indigo" dark fixed app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>Application</v-toolbar-title>
-    </v-toolbar> -->
-
+    </v-toolbar>-->
     <v-content>
       <v-container fluid fill-height>
-        <v-layout
-          justify-center
-          align-center
-        >
-        
+        <v-layout justify-center align-center>
           <!-- <v-flex text-xs-center>
             <v-tooltip left>
               <v-btn slot="activator" :href="source" icon large target="_blank">
@@ -50,23 +44,37 @@
               </v-btn>
               <span>Codepen</span>
             </v-tooltip>
-          </v-flex> -->
+          </v-flex>-->
         </v-layout>
       </v-container>
     </v-content>
     <v-footer color="indigo" app>
       <span class="white--text">&copy; 2017</span>
+      <v-spacer></v-spacer>
+      <v-btn @click="logout">Logout</v-btn>
     </v-footer>
   </v-app>
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      drawer: null
-    }),
-    props: {
-      source: String
+import firebase from 'firebase';
+
+export default {
+  data: () => ({
+    drawer: null
+  }),
+  props: {
+    source: String
+  },
+  methods: {
+    logout: function() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.replace("login");
+        });
     }
   }
+};
 </script>

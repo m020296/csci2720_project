@@ -86,11 +86,11 @@ export default {
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
         .then(
-          function(user) {
-            // this.$router.replace("welcome");
-            alert("nice");
+          (user) => {
+            this.$router.replace('welcome');
+            // alert("nice");
           },
-          function(err) {
+          (err) => {
             alert("Oops. " + err.message);
           }
         );
