@@ -16,7 +16,7 @@
     <br>
     <br>
     <main padding-top>
-      <router-view v-model="routeView"/>
+      <router-view @click="test"/>
     </main>
   </div>
 </template>
@@ -28,19 +28,26 @@ export default {
   name: "App",
   data() {
     return {
+      routeView: ""
     };
   },
-  methods: {}
-};
-
-firebase.auth().onAuthStateChanged(() => {
-  // console.log("firebase login logout");
-  if (user) {
-  //   console.log("Sign ed in");
-    console.log(this.$refs.loginBtn);
-  } else {
-    console.log(this.$refs.loginBtn);
-  //   console.log("Sign ed out");
+  methods: {
+    test: function() {
+      console.log("test");
+      firebase
+        .auth()
+        .onAuthStateChanged()
+        .then(
+          (user) => {
+            console.log("Sign ed in");
+            console.log(this.$refs.loginBtn);
+          },
+          (err) => {
+            console.log(this.$refs.loginBtn);
+            console.log("Sign ed out");
+          }
+        );
+    }
   }
-});
+};
 </script>
