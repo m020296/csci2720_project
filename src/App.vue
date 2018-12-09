@@ -8,8 +8,8 @@
       <v-toolbar-items>
         <v-btn flat to="/">Home</v-btn>
         <v-btn flat to="/about">About</v-btn>
-        <v-btn flat to="/login">Login</v-btn>
-        <v-btn flat to="/signup">Sign Up</v-btn>
+        <v-btn id="loginBtn" flat to="/login">Login</v-btn>
+        <v-btn id="SignupBtn" flat to="/signup">Sign Up</v-btn>
       </v-toolbar-items>
     </v-toolbar>
     <br>
@@ -28,7 +28,6 @@ export default {
   name: "App",
   data() {
     return {
-      routeView: ""
     };
   },
   methods: {}
@@ -37,9 +36,11 @@ export default {
 firebase.auth().onAuthStateChanged(() => {
   // console.log("firebase login logout");
   if (user) {
-    console.log("Sign ed in");
+  //   console.log("Sign ed in");
+    console.log(this.$refs.loginBtn);
   } else {
-    console.log("Sign ed out");
+    console.log(this.$refs.loginBtn);
+  //   console.log("Sign ed out");
   }
 });
 </script>
