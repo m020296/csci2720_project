@@ -1,9 +1,8 @@
-import Vue from 'vue'
-import './plugins/vuetify'
-import firebase from 'firebase'
-import App from './App.vue'
-import router from './router'
-
+import Vue from "vue";
+import "./plugins/vuetify";
+import firebase from "firebase";
+import App from "./App.vue";
+import router from "./router";
 
 var config = {
   apiKey: "AIzaSyBIjnXNtVGp_4K4wBKC4I3bF9uj17n0WfM",
@@ -16,20 +15,29 @@ var config = {
 
 firebase.initializeApp(config);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 // new Vue({
 //   router,
 //   render: h => h(App)
 // }).$mount('#app')
-let app = '';
+let app = "";
 
-firebase.auth().onAuthStateChanged(() => {
-  if (!app) {
-    /* eslint-disable no-new */
-    app = new Vue({
-      router,
-      render: h => h(App)
-    }).$mount('#app');
-  }
-});
+firebase
+  .auth()
+  .onAuthStateChanged(function(user)  {
+    if (!app) {
+      /* eslint-disable no-new */
+      app = new Vue({
+        router,
+        render: h => h(App)
+      }).$mount("#app");
+    }
+    if(user){
+      console.log("login");
+      
+      
+    }else{
+      console.log("logout");
+    }
+  });

@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <!-- <v-navigation-drawer
+    <v-navigation-drawer
       v-model="drawer"
       fixed
       app
@@ -23,12 +23,16 @@
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
-    </v-navigation-drawer>-->
-    <!-- <v-toolbar color="indigo" dark fixed app>
+
+    </v-navigation-drawer>
+    <v-toolbar color="indigo" dark fixed app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Application</v-toolbar-title>
-    </v-toolbar>-->
+      <v-toolbar-title>CSCI 2720 Project</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn @click="logout" light>Logout</v-btn>
+    </v-toolbar> 
     <v-content>
+      
       <v-container fluid fill-height>
         <v-layout justify-center align-center>
           <!-- <v-flex text-xs-center>
@@ -44,14 +48,14 @@
               </v-btn>
               <span>Codepen</span>
             </v-tooltip>
-          </v-flex>-->
+          </v-flex> -->
+          
         </v-layout>
       </v-container>
     </v-content>
     <v-footer color="indigo" app>
       <span class="white--text">&copy; 2017</span>
-      <v-spacer></v-spacer>
-      <v-btn @click="logout">Logout</v-btn>
+      
     </v-footer>
   </v-app>
 </template>
