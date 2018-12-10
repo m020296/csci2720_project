@@ -61,25 +61,22 @@
       <v-toolbar-title>Admin</v-toolbar-title>
       <v-btn @click="logout" light>Logout</v-btn>
     </v-toolbar> 
-    <v-content>
-      
+        <v-content>
       <v-container fluid fill-height>
         <v-layout justify-center align-center>
-          <!-- <v-flex text-xs-center>
-            <v-tooltip left>
-              <v-btn slot="activator" :href="source" icon large target="_blank">
-                <v-icon large>code</v-icon>
-              </v-btn>
-              <span>Source</span>
-            </v-tooltip>
-            <v-tooltip right>
-              <v-btn slot="activator" icon large href="https://codepen.io/johnjleider/pen/rJdVMq" target="_blank">
-                <v-icon large>mdi-codepen</v-icon>
-              </v-btn>
-              <span>Codepen</span>
-            </v-tooltip>
-          </v-flex> -->
-          
+          <v-flex text-xs-left>
+            <p><h3>Hi, Admin</h3><br>
+            As an Admin, you can:<br>
+            </p>
+              <p>
+              1. Flush data, i.e. reload from the online dataset<br>
+              2. CRUD event data in the local database<br>
+              3. CRUD user data (username and password only) in the local database<br>
+              4. Obtain event data from CSV file upload (simple instructions need to be provided for
+              user for data format)<br>
+              5. Log out as admin<br>
+              </p>
+          </v-flex>
         </v-layout>
       </v-container>
     </v-content>
@@ -104,7 +101,7 @@ export default {
     logout: function() {
       this.$router.replace("login");
     },
-    home: function(){
+    admin: function(){
       this.$router.replace("admin");
     },
     flushData: function(){
