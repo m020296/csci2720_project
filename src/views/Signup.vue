@@ -147,10 +147,9 @@ export default {
                 let uid = firebase.auth().currentUser.uid;
 
                 db.collection("user")
-                  .doc(uid)
+                  .doc(this.username)
                   .set({
                     email: this.email,
-                    username: this.username,
                     favEvents: []
                   });
                 console.log(

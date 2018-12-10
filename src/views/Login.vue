@@ -64,32 +64,18 @@ export default {
   },
   methods: {
     login: function() {
-      console.log(
-        "User input: " + this.username + " " + this.email + " " + this.password
-      );
+      console.log("User input: " + this.username + " " + this.password);
 
-      db.collection("user")
-        .where("username", "==", this.username)
-        .get()
-        .then(function(querySnapshot) {
-          let email = "";
-          let password = this.password;
+      const usersRef = db.collection("user").doc(this.username);
 
-          if (password.length <= 5) {
-            console.log("in");
-            pw = "00" + pw;
-          }
-          querySnapshot.forEach(function(doc) {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(doc.data().email, " => ", doc.data());
-            email = doc.data().email;
-          });
-
-          console.log("User info: " + email + password);
-
-          firebase
+      usersRef.get().then(docSnapshot => {
+        
+        if (docSnapshot.exists) {
+            console.log("success" + this.username + " " + this.password);
+            console.log(docSnapshot.data().email);
+            firebase
             .auth()
-            .signInWithEmailAndPassword(email, this.password)
+            .signInWithEmailAndPassword(docSnapshot.data().email, this.password)
             .then(
               user => {
                 this.$router.replace("welcome");
@@ -99,10 +85,10 @@ export default {
                 alert("Oops. " + err.message);
               }
             );
-        })
-        .catch(function(err) {
-          console.log("Error getting documents: ", error);
-        });
+        } else {
+            alert("User does not exists");
+        }
+      });
     }
   }
 };
