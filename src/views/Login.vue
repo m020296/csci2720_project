@@ -12,19 +12,19 @@
               <v-card-text>
                 <v-form>
                   <v-text-field
-                    v-model="userid"
+                    v-model="username"
                     prepend-icon="person"
-                    name="login"
-                    label="Login"
+                    name="username"
+                    label="Username"
                     type="text"
                   ></v-text-field>
-                  <v-text-field
+                  <!-- <v-text-field
                     v-model="email"
                     id="email"
                     prepend-icon="email"
                     name="email"
                     label="Email"
-                  ></v-text-field>
+                  ></v-text-field>-->
                   <v-text-field
                     v-model="password"
                     id="password"
@@ -51,32 +51,58 @@
 
 <script>
 import firebase from "firebase";
+import { db } from "../main";
 
 export default {
   name: "login",
   data() {
     return {
-      userid: '',
-      email: '',
-      password: ''
+      username: "",
+      //   email: "",
+      password: ""
     };
   },
   methods: {
     login: function() {
+      console.log(
+        "User input: " + this.username + " " + this.email + " " + this.password
+      );
 
-        
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.email, this.password)
-        .then(
-          (user) => {
-            this.$router.replace('welcome');
-            // alert("login-ed")
-          },
-          (err) => {
-            alert("Oops. " + err.message);
+      db.collection("user")
+        .where("username", "==", this.username)
+        .get()
+        .then(function(querySnapshot) {
+          let email = "";
+          let password = this.password;
+
+          if (password.length <= 5) {
+            console.log("in");
+            pw = "00" + pw;
           }
-        );
+          querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.data().email, " => ", doc.data());
+            email = doc.data().email;
+          });
+
+          console.log("User info: " + email + password);
+
+          firebase
+            .auth()
+            .signInWithEmailAndPassword(email, this.password)
+            .then(
+              user => {
+                this.$router.replace("welcome");
+                // alert("login-ed")
+              },
+              err => {
+                alert("Oops. " + err.message);
+              }
+            );
+        })
+        .catch(function(err) {
+          console.log("Error getting documents: ", error);
+        });
     }
   }
 };

@@ -112,39 +112,64 @@ export default {
       if (pw == this.confirm_password) return true;
       else return "Confirm Password must be equal to password";
     },
+
     signUp: function() {
-      let pw = this.password;
-      console.log(this.email + " " + this.password);
-      if (pw.length <= 5) {
-        console.log("in");
-        pw = "00" + pw;
-      }
-      console.log("after: " + this.email + " " + pw);
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.email, pw)
-        .then(
-          user => {
-            let uid = firebase.auth().currentUser.uid;
+      const usersRef = db.collection("user").doc(this.username);
 
-            db.collection("user")
-              .doc(uid)
-              .set({
-                email: this.email,
-                username: this.username,
-                favEvents: []
-              });
-            console.log(
-              "added to db: " + this.username + " " + uid + " " + this.email
-            );
-            this.$router.replace("welcome");
+      usersRef.get().then(docSnapshot => {
+        let result = "";
+        if (docSnapshot.exists) {
+          console.log("success" + this.username + this.email + this.password);
+          console.log(docSnapshot.data().email);
+          alert("this username is used")
+        } else {
 
-            // alert("nice");
-          },
-          err => {
-            alert("Oops. " + err.message);
+
+
+            console.log("success" + this.username + this.email + this.password);
+
+
+
+
+
+          let pw = this.password;
+          console.log(this.email + " " + this.password);
+          if (pw.length <= 5) {
+            console.log("in");
+            pw = "00" + pw;
           }
-        );
+          console.log("after: " + this.email + " " + pw);
+          firebase
+            .auth()
+            .createUserWithEmailAndPassword(this.email, pw)
+            .then(
+              user => {
+                let uid = firebase.auth().currentUser.uid;
+
+                db.collection("user")
+                  .doc(uid)
+                  .set({
+                    email: this.email,
+                    username: this.username,
+                    favEvents: []
+                  });
+                console.log(
+                  "added to db: " + this.username + " " + uid + " " + this.email
+                );
+                this.$router.replace("welcome");
+
+                // alert("nice");
+              },
+              err => {
+                alert("Oops. " + err.message);
+              }
+            );
+
+
+
+
+        }
+      });
     }
   }
 };
