@@ -68,7 +68,7 @@
           <v-flex text-xs-center>
             <p>Flush Data from online</p>
             <v-tooltip left>
-              <v-btn slot="activator" @click="flush_data" icon large target="_blank">
+              <v-btn v-bind:disabled="btnDisable" slot="activator" @click="flush_data" icon large target="_blank">
                 <v-icon large>cloud_download</v-icon>
               </v-btn>
               <span>Click to flush data</span>
@@ -91,7 +91,8 @@ import axios from 'axios';
 import { db } from '../../main';
 export default {
   data: () => ({
-    drawer: null 
+    drawer: null,
+    btnDisable: false
   }),
   props: {
     source: String
@@ -116,6 +117,7 @@ export default {
       this.$router.replace("userData");
     },
     flush_data: function(){
+      this.btnDisable = true;
       let count = 0;
       db.collection('event').where('dummy','==',1).get()
       .then(function(querySnapshot) {
@@ -154,7 +156,8 @@ export default {
             }))
           };
           Promise.all(promises).then(function(){
-            alert("Flush data done! Reloaded "+count+" numbers of record.");
+            alert("Flush data done! Reloaded "+count+" records.");
+            this.btnDisable = false;
           })
       }); 
 
