@@ -72,11 +72,12 @@
         vertical
       ></v-divider>
       <v-spacer></v-spacer>
+      <!-- <v-btn color="blue darken-1" flat @click.native="temp">Temp</v-btn> -->
       <v-dialog v-model="dialog" max-width="500px">
-        <!-- <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn> -->
+        <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn>
         <v-card>
           <v-card-title>
-            <span class="headline">Edit Item</span>
+            <span class="headline">{{ formTitle }}</span>
           </v-card-title>
 
           <v-card-text>
@@ -169,6 +170,7 @@ export default {
     activities: [],
     editedIndex: -1,
     editedItem: {
+      id: '',
       title: '',
       datetime: '',
       organization: '',
@@ -176,6 +178,7 @@ export default {
       district: ''
     },
     defaultItem: {
+      id: '',
       title: '',
       datetime: '',
       organization: '',
@@ -222,16 +225,23 @@ export default {
     },
 
     editItem (item) {
-        //this.editedIndex = this.activities.indexOf(item)
+      // console.log(item);
+        this.editedIndex = this.activities.indexOf(item)
         this.editedItem = Object.assign({}, item)
+        this.editedItem.id = item.id
+        // console.log(this.editedItem);
         this.dialog = true
       },
 
       deleteItem (item) {
-        const index = this.activities.indexOf(item)
+        // const index = this.activities.indexOf(item)
         var r = confirm('Are you sure you want to delete this item?');
           if(r==true){
-            this.activities.splice(index, 1);
+            // this.activities.splice(index, 1);
+            db.collection('event').doc(item.id).delete().then(()=>{
+              console.log(item);
+              console.log("Item Deleted.");
+            });
           }else{
             //
           }
@@ -247,12 +257,44 @@ export default {
 
       save () {
         if (this.editedIndex > -1) {
-          Object.assign(this.activities[this.editedIndex], this.editedItem)
+          //edit item
+          let id = this.editedItem.id;
+          let tempItem = { title: this.editedItem.title,
+            datetime: this.editedItem.datetime,
+            organization: this.editedItem.organization,
+            venue: this.editedItem.venue,
+            district: this.editedItem.district};
+          const updateRef = db.collection('event').doc(id);
+          console.log(updateRef);
+          updateRef.set(tempItem).then((docRef)=>{
+            console.log(tempItem);
+            console.log("Item Updated.");
+          });
+          // Object.assign(this.activities[this.editedIndex], tempItem);
+          // this.activities[this.editedIndex].title = this.editedItem.title;
+          // this.activities[this.editedIndex].datetime = this.editedItem.datetime;
+          // this.activities[this.editedIndex].organization = this.editedItem.organization;
+          // this.activities[this.editedIndex].venue = this.editedItem.venue;
+          // this.activities[this.editedIndex].district = this.editedItem.district;
         } else {
-          this.activities.push(this.editedItem)
+          //new item
+          let tempItem = { title: this.editedItem.title,
+            datetime: this.editedItem.datetime,
+            organization: this.editedItem.organization,
+            venue: this.editedItem.venue,
+            district: this.editedItem.district};
+          db.collection('event').add(tempItem).then((docRef)=>{
+            console.log(tempItem);
+            console.log("New Item Added.");
+          });
+          // this.activities.push(this.editedItem)
         }
         this.close()
       }
+      // ,
+      // temp(){
+      //   console.log(this.activities);
+      // }
   }
 };
 </script>
