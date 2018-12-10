@@ -63,6 +63,10 @@
     </v-toolbar> 
 
    <br><br>
+  <v-container fluid fill-height>
+        <v-layout align-start justify-center>
+          <v-flex xs12 sm12 md12>
+            <v-card class="elevation-12">
   <div>
     <v-toolbar flat color="white">
       <v-toolbar-title>List of Activities</v-toolbar-title>
@@ -79,7 +83,7 @@
           <v-card-title>
             <span class="headline">{{ formTitle }}</span>
           </v-card-title>
-
+          <hr>
           <v-card-text>
             <v-container grid-list-md>
               <v-layout wrap>
@@ -114,7 +118,7 @@
     <v-data-table
       :headers="headers"
       :items="activities"
-      :rows-per-page-items=[5,10]
+      :rows-per-page-items=[10,5]
       class="elevation-1"
     >
       <template slot="items" slot-scope="props">
@@ -123,7 +127,7 @@
         <td class="text-xs-right">{{ props.item.organization }}</td>
         <td class="text-xs-right">{{ props.item.venue }}</td>
         <td class="text-xs-right">{{ props.item.district }}</td>
-        <td class="justify-center layout px-0">
+        <td class="justify-center layout pa-3">
           <v-icon
             small
             class="mr-2"
@@ -141,6 +145,13 @@
       </template>
     </v-data-table>
   </div>
+
+
+</v-card>
+</v-flex>
+</v-layout>
+</v-container>
+
     <v-footer color="indigo" app>
       <span class="white--text">&copy; 2018</span>
       
