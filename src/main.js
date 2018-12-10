@@ -7,8 +7,12 @@ import VueFirestore from 'vue-firestore';
 import VueFire from 'vuefire'
 import 'firebase/firestore'
 import axios from 'axios'
+import VeeValidate from 'vee-validate';
+
 Vue.use(VueFire)
 Vue.use(axios)
+Vue.use(VeeValidate);
+
 var config = {
   apiKey: "AIzaSyBIjnXNtVGp_4K4wBKC4I3bF9uj17n0WfM",
   authDomain: "project2720-eafa3.firebaseapp.com",
