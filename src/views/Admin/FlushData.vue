@@ -116,7 +116,7 @@ export default {
     },
     flush_data: function(){
       axios
-      .get('https://www.lcsd.gov.hk/datagovhk/event/leisure_prog.json')
+      .get(`${'https://cors-anywhere.herokuapp.com/'}https://www.lcsd.gov.hk/datagovhk/event/leisure_prog.json`)
       .then(function (response) {
         console.log(typeof response.data);
         console.log(JSON.parse(response.data));
