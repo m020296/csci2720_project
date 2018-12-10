@@ -6,8 +6,9 @@ import router from "./router";
 import VueFirestore from 'vue-firestore';
 import VueFire from 'vuefire'
 import 'firebase/firestore'
+import axios from 'axios'
 Vue.use(VueFire)
-
+Vue.use(axios)
 var config = {
   apiKey: "AIzaSyBIjnXNtVGp_4K4wBKC4I3bF9uj17n0WfM",
   authDomain: "project2720-eafa3.firebaseapp.com",

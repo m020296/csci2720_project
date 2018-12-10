@@ -9,6 +9,11 @@ import Welcome from '@/views/Welcome.vue'
 import About from '@/views/About.vue'
 
 
+//admin
+import Admin from '@/views/Admin/Admin.vue'
+import FlushData from '@/views/Admin/FlushData.vue'
+
+
 Vue.use(Router)
 
 const router = new Router({
@@ -46,6 +51,16 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: Admin
+    },
+    {
+      path: '/flushData',
+      name: 'flushData',
+      component: FlushData
     }
   ]
 });

@@ -6,9 +6,9 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
-    
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "firebase": "^5.7.0",
     "vue": "^2.5.17",
     "vue-firestore": "^0.3.1",
