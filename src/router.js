@@ -12,6 +12,7 @@ import About from '@/views/About.vue'
 //admin
 import Admin from '@/views/Admin/Admin.vue'
 import FlushData from '@/views/Admin/FlushData.vue'
+import EventData from '@/views/Admin/EventData.vue'
 
 
 Vue.use(Router)
@@ -61,7 +62,13 @@ const router = new Router({
       path: '/flushData',
       name: 'flushData',
       component: FlushData
+    },
+    {
+      path: '/eventData',
+      name: 'eventData',
+      component: EventData
     }
+
   ]
 });
 

@@ -66,7 +66,7 @@
       <v-container fluid fill-height>
         <v-layout justify-center align-center>
           <v-flex text-xs-center>
-            <p>Flush Data from online</p>
+            <p>Flush Data from online (This may take a while..)</p>
             <v-tooltip left>
               <v-btn v-bind:disabled="btnDisable" slot="activator" @click="flush_data" icon large target="_blank">
                 <v-icon large>cloud_download</v-icon>
@@ -142,13 +142,13 @@ export default {
               .get(url+i)
               .then(function (response) {
                 response.data.activities.forEach(function(activity){
-                  var datatime = activity.schedule[0].dateFrom + " " + activity.schedule[0].timeFrom;  
+                  var datetime = activity.schedule[0].dateFrom + " " + activity.schedule[0].timeFrom;  
                   var district = activity.districtNameEnglish; 
                   var title = activity.activityNameEnglish;
                   var organization = activity.organisationNameEnglish;
                   var venue = activity.locationNameEnglish;
-                  console.log(title + " " + organization + " " + district + " " + venue + " " + datatime);
-                  db.collection('event').add({title: title, organization: organization, district: district, venue: venue, datatime: datatime, dummy:1});
+                  console.log(title + " " + organization + " " + district + " " + venue + " " + datetime);
+                  db.collection('event').add({title: title, organization: organization, district: district, venue: venue, datetime: datetime, dummy:1});
                   resolve(response.data);
                   count++;
                 })
