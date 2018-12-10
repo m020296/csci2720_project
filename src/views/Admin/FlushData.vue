@@ -87,7 +87,8 @@
 
 <script>
 import firebase from 'firebase';
-import axios from 'axios'
+import axios from 'axios';
+import { db } from '../../main';
 export default {
   data: () => ({
     drawer: null 
@@ -115,16 +116,49 @@ export default {
       this.$router.replace("userData");
     },
     flush_data: function(){
-      axios
-      .get(`${'https://cors-anywhere.herokuapp.com/'}https://www.lcsd.gov.hk/datagovhk/event/leisure_prog.json`)
-      .then(function (response) {
-        console.log(typeof response.data);
-        console.log(JSON.parse(response.data));
-        this.responseData = JSON.parse(response.data); 
-        this.responseData.forEach(function(data){
-          console.log(data);
-        })
-      })
+      let count = 0;
+      db.collection('event').where('dummy','==',1).get()
+      .then(function(querySnapshot) {
+            // Once we get the results, begin a batch
+            var batch = db.batch();
+
+            querySnapshot.forEach(function(doc) {
+                // For each doc, add a delete operation to the batch
+                batch.delete(doc.ref);
+            });
+
+            // Commit the batch
+            return batch.commit();
+      }).then(function() {
+          // Delete completed!
+          var url = 'http://fundraising.one.gov.hk/fundraise_query/webservice/psi/json?itemperpage=100&page=';
+          var i;
+          let promises = []
+          for (i = 1; i <= 4; i++) { 
+            promises.push(new Promise((resolve, reject) => {
+              axios
+              .get(url+i)
+              .then(function (response) {
+                response.data.activities.forEach(function(activity){
+                  var datatime = activity.schedule[0].dateFrom + " " + activity.schedule[0].timeFrom;  
+                  var district = activity.districtNameEnglish; 
+                  var title = activity.activityNameEnglish;
+                  var organization = activity.organisationNameEnglish;
+                  var venue = activity.locationNameEnglish;
+                  console.log(title + " " + organization + " " + district + " " + venue + " " + datatime);
+                  db.collection('event').add({title: title, organization: organization, district: district, venue: venue, datatime: datatime, dummy:1});
+                  resolve(response.data);
+                  count++;
+                })
+              })
+            }))
+          };
+          Promise.all(promises).then(function(){
+            alert("Flush data done! Reloaded "+count+" numbers of record.");
+          })
+      }); 
+
+      
     }
   }
 };
