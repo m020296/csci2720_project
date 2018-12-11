@@ -13,6 +13,7 @@ import About from '@/views/About.vue'
 import Admin from '@/views/Admin/Admin.vue'
 import FlushData from '@/views/Admin/FlushData.vue'
 import EventData from '@/views/Admin/EventData.vue'
+import UserData from '@/views/Admin/UserData.vue'
 
 
 Vue.use(Router)
@@ -67,7 +68,13 @@ const router = new Router({
       path: '/eventData',
       name: 'eventData',
       component: EventData
+    },
+    {
+      path: '/userData',
+      name: 'UserData',
+      component: UserData
     }
+
 
   ]
 });

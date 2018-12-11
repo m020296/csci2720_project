@@ -63,7 +63,7 @@
     </v-toolbar> 
         <v-content>
       <v-container fluid fill-height>
-        <v-layout justify-center align-center>
+        <v-layout justify-center align-start>
           <v-flex text-xs-left>
             <p><h3>Hi, Admin</h3><br>
             As an Admin, you can:<br>
