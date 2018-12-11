@@ -1,6 +1,6 @@
 <template>
     <div id="eventContent" class="container">
-        <div class="page-header">
+    <div class="page-header">
             <h1>View the list of the current events</h1>
         </div>
         <div class="panel panel-default">
@@ -16,7 +16,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for"event in {{events}}">
+                        <tr v-for="event in events">
                             <th>{{event.title}}</th>
                             <th>{{event.datetime}}</th> 
                         </tr>
@@ -34,7 +34,8 @@ export default {
   name: "eventList",
   data() {
     return {
-        events: []
+        events: [],
+        event: {}
     };
   },
   firestore () {
