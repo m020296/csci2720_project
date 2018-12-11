@@ -64,11 +64,13 @@
         <v-content>
       <v-container fluid fill-height>
         <v-layout justify-center align-start>
-          <v-flex text-xs-left>
-            <p><h3>Hi, Admin</h3><br>
-            As an Admin, you can:<br>
-            </p>
-              <p>
+          <v-flex  xs12 sm10 md10>
+          <v-card class="elevation-12">
+            <v-card-title>
+              <span class="headline">Hi, Admin </span>
+            </v-card-title>
+            <v-card-text>
+            <p>As an Admin, you can:<br>
               1. Flush data, i.e. reload from the online dataset<br>
               2. CRUD event data in the local database<br>
               3. CRUD user data (username and password only) in the local database<br>
@@ -76,6 +78,8 @@
               user for data format)<br>
               5. Log out as admin<br>
               </p>
+            </v-card-text>
+            </v-card>
           </v-flex>
         </v-layout>
       </v-container>

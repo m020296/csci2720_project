@@ -64,15 +64,19 @@
     <v-content>
       
       <v-container fluid fill-height>
-        <v-layout justify-center align-center>
-          <v-flex text-xs-center>
-            <p>Flush Data from online (This may take a while..)</p>
-            <v-tooltip left>
-              <v-btn v-bind:disabled="btnDisable" slot="activator" @click="flush_data" icon large target="_blank">
-                <v-icon large>cloud_download</v-icon>
-              </v-btn>
-              <span>Click to flush data</span>
-            </v-tooltip>
+        <v-layout justify-center align-start>
+          <v-flex  xs12 sm8 md8 text-xs-center>
+            <v-card class="elevation-12">
+              <br>
+              <h4>Flush Data from online (This may take a while..)</h4>
+              <v-tooltip left>
+                <v-btn v-bind:disabled="btnDisable" slot="activator" @click="flush_data" icon large target="_blank">
+                  <v-icon large>cloud_download</v-icon>
+                </v-btn>
+                <span>Click to flush data</span>
+              </v-tooltip>
+              <br><br>
+            </v-card>
           </v-flex>
           
         </v-layout>

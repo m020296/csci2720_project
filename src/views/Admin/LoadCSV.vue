@@ -72,7 +72,7 @@
               </v-card-title>
               <v-card-text>
                 <v-container grid-list-md>
-                  <p>CSV format (seperated by tab):<br>
+                  <p>CSV format (NO header, seperated by tab):<br>
                     title  datetime  organization  venue  district<br>
                   </p> 
                   <upload-btn v-bind:disabled="uploadBtnDisable"
