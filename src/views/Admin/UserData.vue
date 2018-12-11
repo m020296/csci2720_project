@@ -154,6 +154,7 @@ import { db } from '../../main';
 export default {
   created () {
     this.initialize()
+    
   },
   data: () => ({
     drawer: null,
@@ -218,9 +219,13 @@ export default {
       var url = "http://localhost:3000/listUsers"
       axios
       .get(url)
-      .then(function (response) {
+      .then( (response) =>  {
         // vm.users=response.data;
         console.log(vm.dbUser);
+        if(vm.dbUser.length == 0){
+          console.log("do it again")
+          this.initialize()
+        }
         var reusers = response.data
         reusers.forEach(function(user){
           vm.dbUser.forEach(function(dbu){
