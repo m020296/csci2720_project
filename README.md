@@ -26,8 +26,8 @@
 ### Non-user
 | Requirement | Progress |
 |--|--|
-| 1. Login + SignUp | Need testing |
-| 2. Login as admin | Need testing |
+| 1. Login + SignUp | **Need testing** |
+| 2. Login as admin | **Need testing** |
 
 
 ## Project setup
