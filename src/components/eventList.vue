@@ -12,12 +12,14 @@
                     <thead>
                         <tr>
                             <th>Title</th>
+                            <th>Origanizer</th>
                             <th>Datetime</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="event in events">
+                        <tr v-for="event in events.slice().reverse()">
                             <th>{{event.title}}</th>
+                            <th>{{event.organization}}</th>
                             <th>{{event.datetime}}</th> 
                         </tr>
                     </tbody>
@@ -35,7 +37,8 @@ export default {
   data() {
     return {
         events: [],
-        event: {}
+        event: {},
+        start: 0
     };
   },
   firestore () {
@@ -43,7 +46,7 @@ export default {
       events: db.collection('event').orderBy('datetime')
     }
   }
-};
+}
 </script>
 
 <style></style>
