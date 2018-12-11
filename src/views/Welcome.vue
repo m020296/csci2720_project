@@ -61,12 +61,12 @@ export default {
   props: {
     source: String
   },
-  created() {
+  beforeCreate() {
     // console.log("test");
     // console.log(this.text);
     const currentUser = firebase.auth().currentUser;
     console.log("Email: " + currentUser.email);
-  this.text = ""
+    this.text = "";
     const usersRef = db.collection("user");
 
     usersRef
@@ -74,7 +74,6 @@ export default {
       .limit(1)
       .get()
       .then(
-        
         // function(querySnapshot) {
         //   if(querySnapshot.exists){
         //   console.log("Exsit");
@@ -85,14 +84,13 @@ export default {
         //   });
         //  })
         querySnapshot => {
-          
-          if (!querySnapshot.empty) {
-            // console.log("--Test--: " + )  
+          // if (!querySnapshot.empty) {
+            // console.log("--Test--: " + )
             // console.log("success" + this.username + " " + this.password);
             // console.log("Deep : " + querySnapshot.docs[0].email);
             // console.log("Now: " + this.text)
-            
-            this.text = querySnapshot.docs[0].id
+
+            this.text = querySnapshot.docs[0].id;
             //     firebase
             //     .auth()
             //     .signInWithEmailAndPassword(querySnapshot.data().email, this.password)
@@ -105,11 +103,12 @@ export default {
             //         alert("Oops. " + err.message);
             //       }
             //     );
-          } else {
-            alert("User does not exists");
-          }
+          // } else {
+            // alert("User does not exists");
+          // }
         }
       );
+      
     // this.text = "fuck";
   },
   methods: {

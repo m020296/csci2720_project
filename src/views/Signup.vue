@@ -124,13 +124,7 @@ export default {
           alert("this username is used")
         } else {
 
-
-
             console.log("success" + this.username + this.email + this.password);
-
-
-
-
 
           let pw = this.password;
           console.log(this.email + " " + this.password);
