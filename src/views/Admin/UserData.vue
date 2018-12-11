@@ -69,7 +69,7 @@
             <v-card class="elevation-12">
   <div>
     <v-toolbar flat color="white">
-      <v-toolbar-title>List of Activities</v-toolbar-title>
+      <v-toolbar-title>List of users</v-toolbar-title>
       <v-divider
         class="mx-2"
         inset
@@ -77,7 +77,7 @@
       ></v-divider>
       <v-spacer></v-spacer>
       <v-btn color="blue darken-1" flat @click.native="temp">Temp</v-btn>
-      <!-- <v-dialog v-model="dialog" max-width="500px">
+      <v-dialog v-model="dialog" max-width="500px">
         <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn>
         <v-card>
           <v-card-title>
@@ -88,19 +88,10 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.title" label="Title"></v-text-field>
+                  <v-text-field v-model="editedItem.username" label="Username"></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.datetime" label="Datetime"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.organization" label="Organization"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.venue" label="Venue"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.district" label="District"></v-text-field>
+                  <v-text-field v-model="editedItem.password" label="Password"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -112,21 +103,18 @@
             <v-btn color="blue darken-1" flat @click.native="save">Save</v-btn>
           </v-card-actions>
         </v-card>
-      </v-dialog> -->
+      </v-dialog>
     </v-toolbar>
-  <!-- 
+  
     <v-data-table
       :headers="headers"
-      :items="activities"
+      :items="users"
       :rows-per-page-items=[10,5]
       class="elevation-1"
     >
       <template slot="items" slot-scope="props">
-        <td>{{ props.item.title }}</td>
-        <td class="text-xs-right">{{ props.item.datetime }}</td>
-        <td class="text-xs-right">{{ props.item.organization }}</td>
-        <td class="text-xs-right">{{ props.item.venue }}</td>
-        <td class="text-xs-right">{{ props.item.district }}</td>
+        <td class="text-xs-left">{{ props.item.username }}</td>
+        <td class="text-xs-left">{{ props.item.password }}</td>
         <td class="justify-center layout pa-3">
           <v-icon
             small
@@ -143,7 +131,7 @@
           </v-icon>
         </td>
       </template>
-    </v-data-table> -->
+    </v-data-table>
   </div>
 
 
@@ -163,60 +151,49 @@
 import firebase from 'firebase';
 import axios from 'axios';
 import { db } from '../../main';
-import { dbadmin } from '../../main';
 export default {
+  created () {
+    this.initialize()
+  },
   data: () => ({
-    drawer: null
-    // ,
-    // dialog: false,
-    // headers: [
-    //   {
-    //     text: 'Title',
-    //     align: 'left',
-    //     value: 'title'
-    //   },
-    //   { text: 'Datetime', value: 'datetime' },
-    //   { text: 'Organization', value: 'organization' },
-    //   { text: 'Venue', value: 'venue' },
-    //   { text: 'District', value: 'district' }
-    // ],
-    // activities: [],
-    // editedIndex: -1,
-    // editedItem: {
-    //   id: '',
-    //   title: '',
-    //   datetime: '',
-    //   organization: '',
-    //   venue: '',
-    //   district: ''
-    // },
-    // defaultItem: {
-    //   id: '',
-    //   title: '',
-    //   datetime: '',
-    //   organization: '',
-    //   venue: '',
-    //   district: ''
-    // }
-    
+    drawer: null,
+    dialog: false,
+    headers: [
+      { text: 'Username', value: 'username', sortable: false },
+      { text: 'Password', value: 'password', sortable: false }
+    ],
+    users: [],
+    dbUser:[],
+    editedIndex: -1,
+    editedItem: {
+      uid:'',
+      username: '',
+      mail:'',
+      password: ''
+    },
+    defaultItem: {
+      uid:'',
+      username: '',
+      mail:'',
+      password: ''
+    }
   }),
-  // firestore () {
-  //   return {
-  //     activities: admin.auth().listUsers();
-  //   }
-  // },
-  // computed: {
-  //   formTitle () {
-  //     return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-  //   }
-  // },
+  computed: {
+    formTitle () {
+      return this.editedIndex === -1 ? 'New User' : 'Edit User'
+    }
+  },
 
-  // watch: {
-  //   dialog (val) {
-  //     val || this.close()
-  //   }
-  // },
-
+  watch: {
+    dialog (val) {
+      val || this.close()
+    }
+  },
+  firestore () {
+    return {
+      dbUser: db.collection('user')
+    }
+  },
   methods: {
     logout: function() {
       this.$router.replace("login");
@@ -236,89 +213,116 @@ export default {
     userData: function(){
       this.$router.replace("userData");
     },
+    initialize(){
+      var vm = this
+      var url = "http://localhost:3000/listUsers"
+      axios
+      .get(url)
+      .then(function (response) {
+        // vm.users=response.data;
+        console.log(vm.dbUser);
+        var reusers = response.data
+        reusers.forEach(function(user){
+          vm.dbUser.forEach(function(dbu){
+            if(user.email == dbu.email){
+              vm.users.push({uid:user.uid, email:user.email, username:dbu.id, password:user.passwordHash})
+              console.log(vm.users)
+              return
+            }
+          })
+        })
+      })
+    },
+    editItem (item) {
+      // console.log(item);
+        this.editedIndex = this.users.indexOf(item)
+        this.editedItem = Object.assign({}, item)
+        this.editedItem.password = ''
+        // this.editedItem.username = item.email;
+        // this.editedItem.passwordHash = item.passwordHash;
+        // this.editedItem.uid = item.uid
+        console.log(this.editedItem);
+        this.dialog = true
+      },
 
-    // editItem (item) {
-    //   // console.log(item);
-    //     this.editedIndex = this.activities.indexOf(item)
-    //     this.editedItem = Object.assign({}, item)
-    //     this.editedItem.id = item.id
-    //     // console.log(this.editedItem);
-    //     this.dialog = true
-    //   },
+      deleteItem (item) {
+        const index = this.users.indexOf(item)
+        var r = confirm('Are you sure you want to delete this item?');
+          if(r==true){
+             this.users.splice(index, 1);
+            // db.collection('event').doc(item.id).delete().then(()=>{
+            //   console.log(item);
+            //   console.log("Item Deleted.");
+            // });
+          }else{
+            //
+          }
+      },
 
-    //   deleteItem (item) {
-    //     // const index = this.activities.indexOf(item)
-    //     var r = confirm('Are you sure you want to delete this item?');
-    //       if(r==true){
-    //         // this.activities.splice(index, 1);
-    //         db.collection('event').doc(item.id).delete().then(()=>{
-    //           console.log(item);
-    //           console.log("Item Deleted.");
-    //         });
-    //       }else{
-    //         //
-    //       }
-    //   },
+      close () {
+        this.dialog = false
+        setTimeout(() => {
+          this.editedItem = Object.assign({}, this.defaultItem)
+          this.editedIndex = -1
+        }, 300)
+      },
 
-    //   close () {
-    //     this.dialog = false
-    //     setTimeout(() => {
-    //       this.editedItem = Object.assign({}, this.defaultItem)
-    //       this.editedIndex = -1
-    //     }, 300)
-    //   },
-
-    //   save () {
-    //     if (this.editedIndex > -1) {
-    //       //edit item
-    //       let id = this.editedItem.id;
-    //       let tempItem = { title: this.editedItem.title,
-    //         datetime: this.editedItem.datetime,
-    //         organization: this.editedItem.organization,
-    //         venue: this.editedItem.venue,
-    //         district: this.editedItem.district};
-    //       const updateRef = db.collection('event').doc(id);
-    //       console.log(updateRef);
-    //       updateRef.set(tempItem).then((docRef)=>{
-    //         console.log(tempItem);
-    //         console.log("Item Updated.");
-    //       });
-    //       // Object.assign(this.activities[this.editedIndex], tempItem);
-    //       // this.activities[this.editedIndex].title = this.editedItem.title;
-    //       // this.activities[this.editedIndex].datetime = this.editedItem.datetime;
-    //       // this.activities[this.editedIndex].organization = this.editedItem.organization;
-    //       // this.activities[this.editedIndex].venue = this.editedItem.venue;
-    //       // this.activities[this.editedIndex].district = this.editedItem.district;
-    //     } else {
-    //       //new item
-    //       let tempItem = { title: this.editedItem.title,
-    //         datetime: this.editedItem.datetime,
-    //         organization: this.editedItem.organization,
-    //         venue: this.editedItem.venue,
-    //         district: this.editedItem.district};
-    //       db.collection('event').add(tempItem).then((docRef)=>{
-    //         console.log(tempItem);
-    //         console.log("New Item Added.");
-    //       });
-    //       // this.activities.push(this.editedItem)
-    //     }
-    //     this.close()
-    //   }
+      save () {
+        if (this.editedIndex > -1) {
+          //edit item
+          const usersRef = db.collection("user").doc(this.editedItem.username);
+          var vm = this
+          console.log(vm.editedItem)
+          usersRef.get().then(docSnapshot => {
+            if (docSnapshot.exists) {
+                console.log("exists!" );
+                alert("This username exist! Update fail.")
+                vm.close()
+            } else {
+                console.log("not exists")
+                console.log(vm.editedItem)
+                Object.assign(vm.users[vm.editedIndex], vm.editedItem);
+                var url = "http://localhost:3000/updateUser"
+                axios
+                .post(url,{uid:vm.editedItem.uid, email:vm.editedItem.email, password:vm.editedItem.password})
+                .then(function (response) {
+                  console.log(response.data);
+                  usersRef.set({id:vm.editedItem.username}).then((docRef)=>{
+                    console.log(docRef);
+                    console.log("User Updated.");
+                    vm.close()
+                  });
+                })
+                
+            }
+          });
+        } else {
+          //new item
+          // let tempItem = { title: this.editedItem.title,
+          //   datetime: this.editedItem.datetime,
+          //   organization: this.editedItem.organization,
+          //   venue: this.editedItem.venue,
+          //   district: this.editedItem.district};
+          // db.collection('event').add(tempItem).then((docRef)=>{
+          //   console.log(tempItem);
+          //   console.log("New Item Added.");
+          // });
+          let tempItem = { email: this.editedItem.username,
+            passwordHash: this.editedItem.password};
+          this.users.push(tempItem)
+          this.close()
+        }
+      },
       
       temp(){
-        dbadmin.auth().listUsers()
-        .then(function(listUsersResult) {
-          listUsersResult.users.forEach(function(userRecord) {
-            console.log("user", userRecord.toJSON());
-          });
-          if (listUsersResult.pageToken) {
-            // List next batch of users.
-            listAllUsers(listUsersResult.pageToken)
-          }
-        })
-        .catch(function(error) {
-          console.log("Error listing users:", error);
-        });
+          console.log("listing users:");
+          var url = "http://localhost:3000/listUsers"
+          axios
+          .get(url)
+          .then(function (response) {
+            console.log(response.data);
+            
+          })
       }
   }
 };
