@@ -14,6 +14,7 @@ import Admin from '@/views/Admin/Admin.vue'
 import FlushData from '@/views/Admin/FlushData.vue'
 import EventData from '@/views/Admin/EventData.vue'
 import UserData from '@/views/Admin/UserData.vue'
+import LoadCSV from '@/views/Admin/LoadCSV.vue'
 
 
 Vue.use(Router)
@@ -73,6 +74,11 @@ const router = new Router({
       path: '/userData',
       name: 'UserData',
       component: UserData
+    },
+    {
+      path: '/loadCSV',
+      name: 'LoadCSV',
+      component: LoadCSV
     }
 
 
