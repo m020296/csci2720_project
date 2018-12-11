@@ -20,7 +20,7 @@
 | 1. Flush Data | **Need testing** |
 | 2. CRUD event data | **Need testing** |
 | 3. CRUD user data |  |
-| 4. Load CSV |  |
+| 4. Load CSV | **Need testing** |
 | 5. Logout | **Need testing** |
 
 ### Non-user
