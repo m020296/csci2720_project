@@ -55,20 +55,19 @@
       <v-toolbar-title>Admin</v-toolbar-title>
       <v-btn @click="logout" light>Logout</v-btn>
     </v-toolbar>
-
-    <br>
-    <v-container fluid fill-height>
-      <v-layout align-start justify-center>
-        <v-flex xs12 sm12 md12>
-          <v-card class="elevation-12">
+    <v-content>
+      <v-container fluid fill-height>
+        <v-layout justify-center align-start>
+          <v-flex  xs12 sm12 md12 text-xs-center>
+            <v-card class="elevation-12">
             <div>
               <v-toolbar flat color="white">
                 <v-toolbar-title>List of users</v-toolbar-title>
                 <v-divider class="mx-2" inset vertical></v-divider>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" flat @click.native="temp">Temp</v-btn>
+                <!-- <v-btn color="blue darken-1" flat @click.native="temp">Temp</v-btn> -->
                 <v-dialog v-model="dialog" max-width="500px">
-                  <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn>
+                  <v-btn slot="activator" color="primary" dark class="mb-2">New User</v-btn>
                   <v-card>
                     <v-card-title>
                       <span class="headline">{{ formTitle }}</span>
@@ -107,7 +106,7 @@
               >
                 <template slot="items" slot-scope="props">
                   <td class="text-xs-left">{{ props.item.username }}</td>
-                  <td class="text-xs-left">{{ props.item.email }}</td>
+                  <td class="text-xs-left">{{ props.item.password }}</td>
                   <!-- <td class="text-xs-left">{{ props.item.password }}</td> -->
                   <td class="justify-center layout pa-3">
                     <v-icon small class="mr-2" @click="editItem(props.item)">edit</v-icon>
@@ -120,7 +119,7 @@
         </v-flex>
       </v-layout>
     </v-container>
-
+  </v-content>
     <v-footer color="indigo" app>
       <span class="white--text">&copy; 2018</span>
     </v-footer>
@@ -140,7 +139,7 @@ export default {
     dialog: false,
     headers: [
       { text: "Username", value: "username", sortable: false },
-      { text: "Email", value: "email", sortable: false },
+      { text: "Password", value: "password", sortable: false },
       // { text: "Password", value: "password", sortable: false }
     ],
     users: [],
@@ -149,12 +148,14 @@ export default {
     editedItem: {
       uid: "",
       username: "",
+      ori: "",
       email: "",
       password: ""
     },
     defaultItem: {
       uid: "",
       username: "",
+      ori: "",
       email: "",
       password: ""
     }
@@ -194,62 +195,89 @@ export default {
     userData: function() {
       this.$router.replace("userData");
     },
+    clear(){
+      this.users= []
+    },
     initialize() {
       var vm = this;
       var url = "http://localhost:3000/listUsers";
       axios.get(url).then(response => {
-        // vm.users=response.data;
-        console.log(vm.dbUser);
-        if (vm.dbUser.length == 0) {
-          console.log("do it again");
-          this.initialize();
-        } else {
-          var reusers = response.data;
-          reusers.forEach(function(user) {
-            vm.dbUser.forEach(function(dbu) {
-              if (user.email == dbu.email) {
-                console.log("\nInitialize: \n" + user.uid + "\n" + user.email+ "\n" + dbu.username + "\n" + user.passwordHash);
-                
-                vm.users.push({
-                  uid: user.uid,
-                  email: user.email,
-                  username: dbu.username,
-                  password: user.passwordHash
-                });
-                
-                return;
-              }
+        console.log(response.data)
+        if(response.data.error != "error"){
+          console.log(vm.dbUser);
+          if (vm.dbUser.length == 0) {
+            console.log("do it again");
+            this.initialize();
+          } else {
+            var reusers = response.data.users;
+            reusers.forEach(function(user) {
+              vm.dbUser.forEach(function(dbu) {
+                if (user.email == dbu.email) {
+                  console.log("\nInitialize: \n" + user.uid + "\n" + user.email+ "\n" + dbu.username + "\n" + user.passwordHash + "\n" + user.favEvents);
+                  var fav = []
+                  if(typeof user.favEvents !== "undefined"){
+                    fav = user.favEvents
+                  }
+                  console.log(fav)
+                  vm.users.push({
+                    uid: user.uid,
+                    email: user.email,
+                    favEvents: fav, 
+                    username: dbu.username,
+                    ori: dbu.username,
+                    password: user.passwordHash
+                  });
+                  return;
+                }
+              });
             });
-          });
+          }
+        }else{
+          console.log("node js resopnse error, "+response.data.msg)
         }
+        
       });
     },
     editItem(item) {
-      // console.log(item);
       this.editedIndex = this.users.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.editedItem.password = "";
-      // this.editedItem.username = item.email;
-      // this.editedItem.passwordHash = item.passwordHash;
-      // this.editedItem.uid = item.uid
       console.log(this.editedItem);
       this.dialog = true;
     },
 
     deleteItem(item) {
+      var vm = this
       const index = this.users.indexOf(item);
+      console.log("delete target: "+item.uid);
       var r = confirm("Are you sure you want to delete this item?");
       if (r == true) {
-        this.users.splice(index, 1);
-        // db.collection('event').doc(item.id).delete().then(()=>{
-        //   console.log(item);
-        //   console.log("Item Deleted.");
-        // });
-      } else {
-        //
+        var url = "http://localhost:3000/deleteUser";
+        axios
+        .post(url, {
+          uid: item.uid
+        })
+        .then(function(response) {
+          console.log(response.data);
+          if(response.data.error != "error"){
+            console.log("firebase deleted user: "+item.uid);
+            db.collection("user")
+            .doc(item.uid)
+            .delete()
+            .then(()=>{
+              console.log("User Deteted.");
+              vm.users.splice(index, 1);
+              vm.close();
+              // vm.clear();
+              // vm.initialize();
+            });
+          }else{
+            console.log("node js resopnse error, "+response.data.msg)
+            alert("Delete User Error! "+response.data.msg)
+          }
+        });
       }
     },
-
     close() {
       this.dialog = false;
       setTimeout(() => {
@@ -260,64 +288,97 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-        //edit item
-        const usersRef = db.collection("user").doc(this.editedItem.username);
+        console.log("edit user");
         var vm = this;
         console.log(vm.editedItem);
+        const usersRef = db.collection("user").where('username','==',vm.editedItem.username)
+        
         usersRef.get().then(docSnapshot => {
-          if (docSnapshot.exists) {
-            console.log("exists!");
+          if (!docSnapshot.empty && vm.editedItem.username!=vm.editedItem.ori) {
+            console.log(vm.editedItem.username+" exists!");
             alert("This username exist! Update fail.");
             vm.close();
           } else {
-            console.log("not exists");
+            console.log(vm.editedItem.username+" not exists / equal to ori");
             console.log(vm.editedItem);
-            Object.assign(vm.users[vm.editedIndex], vm.editedItem);
             var url = "http://localhost:3000/updateUser";
             axios
               .post(url, {
                 uid: vm.editedItem.uid,
+                password: vm.editedItem.password
+              })
+              .then(function(response) {
+                console.log(response.data);
+                if(response.data.error != "error"){
+                  console.log("firebase updated user: "+response.data.uid);
+                  db.collection("user")
+                  .doc(response.data.uid)
+                  .set({
+                    username: vm.editedItem.username,
+                    email: vm.editedItem.email,
+                    favEvents: vm.editedItem.favEvents
+                  })
+                  .then((docRef)=>{
+                    console.log(docRef);
+                    console.log("User Updated.");
+                    vm.close();
+                    vm.clear();
+                    vm.initialize();
+                  });
+                }else{
+                  console.log("node js resopnse error, "+response.data.msg)
+                  alert("Update User Error! "+response.data.msg)
+                }
+              });
+          }
+        });
+      } else {
+        console.log("new user");
+        var vm = this;
+        console.log(vm.editedItem);
+        const usersRef = db.collection("user").where('username','==',vm.editedItem.username)
+        
+        usersRef.get().then(docSnapshot => {
+          if (!docSnapshot.empty) {
+            console.log(vm.editedItem.username+" exists!");
+            alert("This username exist! Create fail.");
+            vm.close();
+          } else {
+            console.log(vm.editedItem.username+" not exists");
+            console.log(vm.editedItem);
+            var url = "http://localhost:3000/createUser";
+            axios
+              .post(url, {
                 email: vm.editedItem.email,
                 password: vm.editedItem.password
               })
               .then(function(response) {
                 console.log(response.data);
-                usersRef.set({ id: vm.editedItem.username }).then(docRef => {
-                  console.log(docRef);
-                  console.log("User Updated.");
-                  vm.close();
-                });
+                if(response.data.error != "error"){
+                  console.log("firebase created user: "+response.data.uid);
+                  db.collection("user")
+                  .doc(response.data.uid)
+                  .set({
+                    username: vm.editedItem.username,
+                    email: vm.editedItem.email,
+                    favEvents: []
+                  }).then((docRef)=>{
+                    console.log(docRef);
+                    console.log("User Created.");
+                    vm.close();
+                    vm.clear();
+                    vm.initialize();
+                  });
+                }else{
+                  console.log("node js resopnse error, "+response.data.msg)
+                  alert("Create User Error! "+response.data.msg)
+                }
+                
               });
           }
         });
-      } else {
-        //new item
-        // let tempItem = { title: this.editedItem.title,
-        //   datetime: this.editedItem.datetime,
-        //   organization: this.editedItem.organization,
-        //   venue: this.editedItem.venue,
-        //   district: this.editedItem.district};
-        // db.collection('event').add(tempItem).then((docRef)=>{
-        //   console.log(tempItem);
-        //   console.log("New Item Added.");
-        // });
-        let tempItem = {
-          username: this.editItem.username,
-          email: this.editedItem.email,
-          password: this.editedItem.password
-        };
-        console.log("tempItem: " + tempItem.username + " " + tempItem.email + " " + tempItem.password)
-        this.users.push(tempItem);
-        this.close();
+        
       }
-    },
-
-    temp() {
-      console.log("listing users:");
-      var url = "http://localhost:3000/listUsers";
-      axios.get(url).then(function(response) {
-        console.log(response.data);
-      });
     }
   }
 };
