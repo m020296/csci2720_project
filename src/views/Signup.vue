@@ -114,13 +114,16 @@ export default {
     },
 
     signUp: function() {
-      const usersRef = db.collection("user").doc(this.username);
+      const usersRef = db.collection("user");
 
-      usersRef.get().then(docSnapshot => {
+      usersRef
+        .where("username", "==", this.username)
+        .limit(1)
+        .get().then(querySnapshot => {
         let result = "";
-        if (docSnapshot.exists) {
+        if (!querySnapshot.empty) {
           console.log("success" + this.username + this.email + this.password);
-          console.log(docSnapshot.data().email);
+          console.log(querySnapshot.docs[0].data().email);
           alert("this username is used");
         } else {
           console.log("success" + this.username + this.email + this.password);

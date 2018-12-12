@@ -1,13 +1,38 @@
 <template>
+
+
+    
     <div id="eventContent" class="container">
+
+        
     <div class="page-header">
             <h1>View the list of the current events</h1>
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Event List</h3>
+                <h3>Event List <v-toolbar
+      dense
+      floating
+      align-end
+    >
+      <v-text-field
+        hide-details
+        prepend-icon="search"
+        single-line
+      ></v-text-field>
+
+      <v-btn icon>
+        <v-icon>my_location</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>more_vert</v-icon>
+      </v-btn>
+    </v-toolbar></h3>
+                
             </div>
             <div class="panel-body">
+                
                 <table class="table table-striped">
                     <thead>
                         <tr>
