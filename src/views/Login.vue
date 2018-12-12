@@ -66,29 +66,40 @@ export default {
     login: function() {
       console.log("User input: " + this.username + " " + this.password);
 
-      const usersRef = db.collection("user").doc(this.username);
+      const usersRef = db.collection("user");
 
-      usersRef.get().then(docSnapshot => {
-        
-        if (docSnapshot.exists) {
-            console.log("success" + this.username + " " + this.password);
-            console.log(docSnapshot.data().email);
+      usersRef
+        .where("username", "==", this.username)
+        .limit(1)
+        .get()
+        .then(querySnapshot => {
+          if (!querySnapshot.empty) {
+            let pw = this.password;
+            if (pw.length <= 5) {
+              console.log("in");
+              pw = "00" + pw;
+            }
+            console.log("success" + this.username + " " + pw);
+            console.log("Email " + querySnapshot.docs[0].data().email);
             firebase
-            .auth()
-            .signInWithEmailAndPassword(docSnapshot.data().email, this.password)
-            .then(
-              user => {
-                this.$router.replace("welcome");
-                // alert("login-ed")
-              },
-              err => {
-                alert("Oops. " + err.message);
-              }
-            );
-        } else {
+              .auth()
+              .signInWithEmailAndPassword(
+                querySnapshot.docs[0].data().email,
+                pw
+              )
+              .then(
+                user => {
+                  this.$router.replace("welcome");
+                  // alert("login-ed")
+                },
+                err => {
+                  alert("Oops. " + err.message);
+                }
+              );
+          } else {
             alert("User does not exists");
-        }
-      });
+          }
+        });
     }
   }
 };

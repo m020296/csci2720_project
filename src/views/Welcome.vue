@@ -90,7 +90,7 @@ export default {
             // console.log("Deep : " + querySnapshot.docs[0].email);
             // console.log("Now: " + this.text)
 
-            this.text = querySnapshot.docs[0].id;
+            this.text = querySnapshot.docs[0].data().username;
             //     firebase
             //     .auth()
             //     .signInWithEmailAndPassword(querySnapshot.data().email, this.password)

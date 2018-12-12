@@ -121,10 +121,9 @@ export default {
         if (docSnapshot.exists) {
           console.log("success" + this.username + this.email + this.password);
           console.log(docSnapshot.data().email);
-          alert("this username is used")
+          alert("this username is used");
         } else {
-
-            console.log("success" + this.username + this.email + this.password);
+          console.log("success" + this.username + this.email + this.password);
 
           let pw = this.password;
           console.log(this.email + " " + this.password);
@@ -141,8 +140,9 @@ export default {
                 let uid = firebase.auth().currentUser.uid;
 
                 db.collection("user")
-                  .doc(this.username)
+                  .doc(uid)
                   .set({
+                    username: this.username,
                     email: this.email,
                     favEvents: []
                   });
@@ -157,10 +157,6 @@ export default {
                 alert("Oops. " + err.message);
               }
             );
-
-
-
-
         }
       });
     }
