@@ -5,29 +5,29 @@
 ## Project Requirement
 
 ### User (So Hon Chuen, Shum Hiu Tung)
-| Requirement | Progress |
-|--|--|
-| 1. SignUp + Login | **Need testing** |
-| 2. List event in table (allow sorting) | **Need testing** |
-| 3. Search by one field | **Need testing** |
+| Requirement | Progress | Done by |
+|--|--|--|
+| 1. SignUp + Login | **Need testing** | Shum Hiu Tung |
+| 2. List event in table (allow sorting) | **Need testing** | Shum Hiu Tung |
+| 3. Search by one field | **Need testing** | Shum Hiu Tung |
 | 4. Separate view of a event: detail + comment(non-threaded) |  |
 | 5. Add event to favourite + see list in another view |  |
-| 6. See user name in top right corner + Logout | **Need testing** |
+| 6. See user name in top right corner + Logout | **Need testing** | Shum Hiu Tung |
 
 ### Admin (Suen Ka Leong, Shum Hiu Tung)
-| Requirement | Progress |
-|--|--|
-| 1. Flush Data | **Need testing** |
-| 2. CRUD event data | **Need testing** |
-| 3. CRUD user data | **Need testing** |
-| 4. Load CSV | **Need testing** |
-| 5. Logout | **Need testing** |
+| Requirement | Progress | Responsible |
+|--|--|--|
+| 1. Flush Data | **Need testing** | Suen Ka Leong |
+| 2. CRUD event data | **Need testing** | Suen Ka Leong |
+| 3. CRUD user data | **Need testing** | Suen Ka Leong, Shum Hiu Tung |
+| 4. Load CSV | **Need testing** | Suen Ka Leong |
+| 5. Logout | **Need testing** | Shum Hiu Tung |
 
 ### Non-user (Shum Hiu Tung)
-| Requirement | Progress |
-|--|--|
-| 1. Login + SignUp | **Need testing** |
-| 2. Login as admin | **Need testing** |
+| Requirement | Progress | Done by |
+|--|--|--|
+| 1. Login + SignUp | **Need testing** | Shum Hiu Tung |
+| 2. Login as admin | **Need testing** | Shum Hiu Tung |
 
 
 ## Project setup
