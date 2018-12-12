@@ -64,7 +64,9 @@
                     <td class="text-xs-left">{{ props.item.district }}</td>
                     <td class="justify-center layout pa-3">
                       <!-- <v-icon small class="mr-2" @click="editItem(props.item)">edit</v-icon> -->
-                      <v-icon @click="detail()">more_horiz</v-icon>
+                      <router-link :to="'/events/' + props.item.id">
+                        <v-icon>more_horiz</v-icon>
+                      </router-link>
                     </td>
                   </template>
                 </v-data-table>
@@ -114,7 +116,11 @@ export default {
       activities: db.collection("event").orderBy("title")
     };
   },
-  computed: {},
+  computed: {
+    pathToDetail: function(id) {
+      return 'events/' + id;
+    }
+  },
 
   watch: {},
 

@@ -16,6 +16,8 @@ import EventData from '@/views/Admin/EventData.vue'
 import UserData from '@/views/Admin/UserData.vue'
 import LoadCSV from '@/views/Admin/LoadCSV.vue'
 
+import EventList from '@/components/eventList'
+import EventDetails from '@/components/eventDetails'
 
 Vue.use(Router)
 
@@ -52,8 +54,21 @@ const router = new Router({
       name: 'welcome',
       component: Welcome,
       meta: {
-        requiresAuth: true
-      }
+         requiresAuth: true
+      },
+      children: [
+        {
+          path: '/events',
+          name: 'eventList',
+          component: EventList, 
+        },
+        {
+          path: '/events/:id',
+          name: 'eventDetail',
+          component: EventDetails,
+          props: true   
+        }
+      ]
     },
     {
       path: '/admin',
@@ -79,9 +94,7 @@ const router = new Router({
       path: '/loadCSV',
       name: 'LoadCSV',
       component: LoadCSV
-    }
-
-
+    },
   ]
 });
 

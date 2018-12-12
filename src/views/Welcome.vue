@@ -35,7 +35,8 @@
 
     <v-content id="userContent">
       <v-container fluid fill-height>
-        <component v-bind:is="component"></component>
+        <!--<component v-bind:is="component"></component>-->
+        <router-view></router-view>
       </v-container>
     </v-content>
   </v-app>
