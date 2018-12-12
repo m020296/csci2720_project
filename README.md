@@ -19,7 +19,7 @@
 |--|--|
 | 1. Flush Data | **Need testing** |
 | 2. CRUD event data | **Need testing** |
-| 3. CRUD user data |  |
+| 3. CRUD user data | **Need testing** |
 | 4. Load CSV | **Need testing** |
 | 5. Logout | **Need testing** |
 
@@ -31,39 +31,39 @@
 
 
 ## Project setup
-
 ```
 npm install
 ```
+
+## 1. Vue.js Part:
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve
 ```
-
 ### Compiles and minifies for production
-
 ```
 npm run build
 ```
 
-  
-
 ### Run your tests
-
 ```
 npm run test
 ```
-
-  
-
 ### Lints and fixes files
-
 ```
 npm run lint
 ```
 
-  
-
 ### Customize configuration
-
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## 2. Node.js Part (server):
+## run
+```
+node server/server.js
+```
+## hot-reloads
+```
+nodemon server/server.js
+```
