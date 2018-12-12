@@ -33,7 +33,7 @@
       <v-btn @click="logout" color="primary">Logout</v-btn>
     </v-toolbar>
 
-    <v-content>
+    <v-content id="userContent">
       <v-container fluid fill-height>
         <component v-bind:is="component"></component>
       </v-container>
@@ -126,5 +126,9 @@ export default {
 #userInfo {
   color: black !important;
   text-transform: none !important;
+}
+
+#userContent{
+  padding: 0px 0px 0px 0px !important;
 }
 </style>

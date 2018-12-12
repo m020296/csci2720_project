@@ -8,7 +8,7 @@
 | Requirement | Progress |
 |--|--|
 | 1. SignUp + Login | **Need testing** |
-| 2. List event in table (allow sorting) |  |
+| 2. List event in table (allow sorting) | **Need testing** |
 | 3. Search by one field |  |
 | 4. Separate view of a event: detail + comment(non-threaded) |  |
 | 5. Add event to favourite + see list in another view |  |

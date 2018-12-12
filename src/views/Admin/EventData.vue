@@ -67,6 +67,7 @@
         <v-layout align-start justify-center>
           <v-flex xs12 sm12 md12>
             <v-card class="elevation-12">
+ <v-content>
   <div>
     <v-toolbar flat color="white">
       <v-toolbar-title>List of Activities</v-toolbar-title>
@@ -115,6 +116,7 @@
       </v-dialog>
     </v-toolbar>
   
+  
     <v-data-table
       :headers="headers"
       :items="activities"
@@ -123,10 +125,10 @@
     >
       <template slot="items" slot-scope="props">
         <td>{{ props.item.title }}</td>
-        <td class="text-xs-right">{{ props.item.datetime }}</td>
-        <td class="text-xs-right">{{ props.item.organization }}</td>
-        <td class="text-xs-right">{{ props.item.venue }}</td>
-        <td class="text-xs-right">{{ props.item.district }}</td>
+        <td class="text-xs-left">{{ props.item.datetime }}</td>
+        <td class="text-xs-left">{{ props.item.organization }}</td>
+        <td class="text-xs-left">{{ props.item.venue }}</td>
+        <td class="text-xs-left">{{ props.item.district }}</td>
         <td class="justify-center layout pa-3">
           <v-icon
             small
@@ -144,8 +146,9 @@
         </td>
       </template>
     </v-data-table>
+    
   </div>
-
+</v-content>
 
 </v-card>
 </v-flex>
