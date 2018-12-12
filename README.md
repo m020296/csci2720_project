@@ -9,7 +9,7 @@
 |--|--|
 | 1. SignUp + Login | **Need testing** |
 | 2. List event in table (allow sorting) | **Need testing** |
-| 3. Search by one field |  |
+| 3. Search by one field | **Need testing** |
 | 4. Separate view of a event: detail + comment(non-threaded) |  |
 | 5. Add event to favourite + see list in another view |  |
 | 6. See user name in top right corner + Logout | **Need testing** |

@@ -10,37 +10,44 @@
                   <v-toolbar-title>List of Activities</v-toolbar-title>
                   <v-divider class="mx-2" inset vertical></v-divider>
                   <v-spacer></v-spacer>
-                  <!-- <v-btn color="blue darken-1" flat @click.native="temp">Temp</v-btn> -->
-                  <!-- <v-dialog v-model="dialog" max-width="500px"> -->
-                  <!-- <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn> -->
-                  <!-- <v-card>
-          <v-card-title>
-            <span class="headline">{{ formTitle }}</span>
-          </v-card-title>
-          <hr>
-          <v-card-text>
-            <v-container grid-list-md>
-              <v-layout wrap>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.title" label="Title"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.datetime" label="Datetime"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.organization" label="Organization"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.venue" label="Venue"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.district" label="District"></v-text-field>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-card-text>
-                  </v-card>-->
-                  <!-- </v-dialog> -->
+
+                  <v-toolbar dense>
+                    <v-overflow-btn
+                      :items="dropdown_edit"
+                      v-model="searchField"
+                      label="Select field"
+                      hide-details
+                      class="pa-0"
+                      overflow
+                    ></v-overflow-btn>
+
+                    <v-text-field
+                      v-model="keyword"
+                      hide-details
+                      class="pa-0"
+                      overflow
+                      label="Keyword"
+                      single-line
+                    ></v-text-field>
+
+                    <v-btn icon flat @click="search">
+                      <v-icon>search</v-icon>
+                    </v-btn>
+                  </v-toolbar>
+
+                  <!-- <v-toolbar style="flex-basis: 60%" flat wrap>
+                    
+                    <v-overflow-btn id="dropDown" fill-height height='2.5em' label="Field"></v-overflow-btn>
+                    <v-text-field hide-details prepend-icon="search" single-line></v-text-field>
+
+                    <v-btn icon>
+                      <v-icon>my_location</v-icon>
+                    </v-btn>
+
+                    <v-btn icon>
+                      <v-icon>more_vert</v-icon>
+                    </v-btn>
+                  </v-toolbar>-->
                 </v-toolbar>
 
                 <v-data-table
@@ -76,6 +83,9 @@ import axios from "axios";
 import { db } from "../main";
 export default {
   data: () => ({
+    dropdown_edit: ["Title", "District", "Venue", "Organization", "Datetime"],
+    searchField: "Field",
+    keyword: "",
     drawer: null,
     dialog: false,
     headers: [
@@ -113,7 +123,38 @@ export default {
       const currentUser = firebase.auth().currentUser;
       console.log("Email: " + currentUser.email);
       console.log("clicked");
+    },
+    search: function() {
+      // console.log("Test: " + this.searchField.toLowerCase() + this.keyword);
+      db.collection("event")
+        // .where(this.searchField.toLowerCase(), "==", this.keyword)
+        .get()
+        .then(querySnapshot => {
+          if (!querySnapshot.empty) {
+            console.log("Test2: " + this.searchField.toLowerCase() + this.keyword);
+            let field = this.searchField.toLowerCase()
+            let keyword = this.keyword
+            let acts = [];
+            querySnapshot.docs.forEach(function(doc) {
+              // console.log("hi")
+              console.log("Test: " + doc.data()[field] + field + keyword)
+              
+              if (doc.data()[field] != undefined && doc.data()[field].indexOf(keyword) != -1) {
+                console.log("---- " +  doc.data()[field].indexOf(keyword) + " ----")
+
+                acts.push(doc.data());
+              }
+            });
+            console.log(acts[0]);
+            return (this.activities = acts);
+          } else {
+            console.log("querySnapshot empty");
+          }
+        });
     }
   }
 };
 </script>
+
+<style>
+</style>
