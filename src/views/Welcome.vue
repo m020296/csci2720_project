@@ -108,8 +108,6 @@ export default {
           // }
         }
       );
-      
-    // this.text = "fuck";
   },
   methods: {
     logout: function() {
