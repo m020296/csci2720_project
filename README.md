@@ -72,20 +72,33 @@ nodemon server/server.js
 3. Design of data schemas and models of your database
 
 There are two collections in the database: event, user
+
 user(String username, String email, Array favEvents)
+
 event(String title, String datetime, String organization, String venue, String district)
 
 For user password, it is saved in the Authenication of the Firebase. The password is automaticaly hashed by Firebase.
 
 4. Technologies and frameworks/libraries in use
+
 Node.js Express
+
 Vue.js Vuetify.js
+
 	Advantages: - the coding is simplier than Angular
+
 				- the size is smaller than Angular
+
 	Disadvantages: - a new frameworks with not much resources in the Internet
+
 				   - WE DIDN'T LEARN VUE.JS IN CLASS, use more time to learn
+
 Firebase
+
 	Advantages: - Authenication of the application can be easily done
+
 				- Great GUI of the database console
+
 	Disadvantages: - does not provide high performance like MongoDB
+	
 				   - Firebase Admin SDK only support some programming language, that's why we need an extra Node.js server
