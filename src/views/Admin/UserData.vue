@@ -250,19 +250,17 @@ export default {
                       "\n" +
                       dbu.username +
                       "\n" +
-                      user.passwordHash +
-                      "\n" +
-                      user.favEvents
+                      user.passwordHash
                   );
-                  var fav = [];
-                  if (typeof user.favEvents !== "undefined") {
-                    fav = user.favEvents;
-                  }
-                  console.log(fav);
+                  // var fav = [];
+                  // if (typeof user.favEvents !== "undefined") {
+                  //   fav = user.favEvents;
+                  // }
+                  // console.log(fav);
                   vm.users.push({
                     uid: user.uid,
                     email: user.email,
-                    favEvents: fav,
+                    // favEvents: fav,
                     username: dbu.username,
                     ori: dbu.username,
                     password: user.passwordHash
@@ -365,10 +363,10 @@ export default {
                   console.log("firebase updated user: " + response.data.uid);
                   db.collection("user")
                     .doc(response.data.uid)
-                    .set({
-                      username: vm.editedItem.username,
-                      email: vm.editedItem.email,
-                      favEvents: vm.editedItem.favEvents
+                    .update({
+                      username: vm.editedItem.username
+                      // ,email: vm.editedItem.email
+                      // ,favEvents: vm.editedItem.favEvents
                     })
                     .then(docRef => {
                       console.log(docRef);
