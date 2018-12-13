@@ -141,7 +141,7 @@
 </v-content>
 </template>
 <style>
-table {
+/* table {
   border: 2px solid #000000;
   border-radius: 3px;
   background-color: #fff;
@@ -164,6 +164,6 @@ td {
 th, td {
   min-width: 120px;
   padding: 10px 20px;
-}
+} */
 
 </style>

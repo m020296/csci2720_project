@@ -18,6 +18,7 @@ import LoadCSV from '@/views/Admin/LoadCSV.vue'
 
 import EventList from '@/components/eventList'
 import EventDetails from '@/components/eventDetails'
+import FavList from '@/components/favouriteList'
 
 Vue.use(Router)
 
@@ -63,10 +64,15 @@ const router = new Router({
           component: EventList, 
         },
         {
-          path: '/events/:id',
+          path: '/events/:id/:title/:datetime/:organization/:venue/:district',
           name: 'eventDetail',
           component: EventDetails,
           props: true   
+        },
+        {
+          path: '/favs',
+          name: "favList",
+          component: FavList
         }
       ]
     },

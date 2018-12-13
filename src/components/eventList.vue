@@ -64,7 +64,7 @@
                     <td class="text-xs-left">{{ props.item.district }}</td>
                     <td class="justify-center layout pa-3">
                       <!-- <v-icon small class="mr-2" @click="editItem(props.item)">edit</v-icon> -->
-                      <router-link :to="'/events/' + props.item.id">
+                      <router-link :to="'/events/' + props.item.id +'/'+ props.item.title + '/' + props.item.datetime + '/' + props.item.organization + '/' + props.item.venue + '/' + props.item.district">
                         <v-icon>more_horiz</v-icon>
                       </router-link>
                     </td>

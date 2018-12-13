@@ -3,7 +3,7 @@
     <!-- /* eslint-disable */ -->
     <v-navigation-drawer v-model="drawer" clipped fixed app width="200">
       <v-list dense>
-        <v-list-tile v-on:click="component = 'eventList'">
+        <v-list-tile to='/events' id="test">
           <v-list-tile-action>
             <v-icon>dashboard</v-icon>
           </v-list-tile-action>
@@ -12,7 +12,7 @@
           </v-list-tile-content>
         </v-list-tile>
 
-        <v-list-tile v-on:click="component = 'favList'">
+        <v-list-tile to='/favs' id="test2">
           <v-list-tile-action>
             <v-icon>star</v-icon>
           </v-list-tile-action>
@@ -131,5 +131,13 @@ export default {
 
 #userContent{
   padding: 0px 0px 0px 0px !important;
+}
+
+#test{
+  text-decoration: none;
+}
+
+#test2{
+  text-decoration: none;
 }
 </style>
