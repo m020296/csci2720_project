@@ -22,7 +22,7 @@
         <p class="subheading font-weight-regular">
           <br>Shum Hiu Tung (1155063707)
           <br>Suen Ka Leong (1155062592)
-          <br>So Hon Chuen (1155063707)
+          <br>So Hon Chuen (1155062753)
         </p>
       </v-flex>
 
