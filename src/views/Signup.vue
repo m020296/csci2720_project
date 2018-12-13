@@ -152,7 +152,7 @@ export default {
                 console.log(
                   "added to db: " + this.username + " " + uid + " " + this.email
                 );
-                this.$router.replace("welcome");
+                this.$router.replace("events");
 
                 // alert("nice");
               },

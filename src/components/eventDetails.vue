@@ -88,7 +88,8 @@ export default {
     datetime: "",
     organization: "",
     venue: "",
-    district: ""
+    district: "",
+    favEvent: []
   }),
   created() {
     this.id = this.$route.params.id;
@@ -116,6 +117,7 @@ export default {
         });
         this.items = comment;
       });
+
   },
   methods: {
     submitComment: function(cm) {
@@ -202,7 +204,27 @@ export default {
           this.items = comment;
         });
     },
-    addFav: function() {}
+    addFav: function() {
+        const currentUser = firebase.auth().currentUser;
+        
+        db.collection("user").doc(currentUser.uid).get().then((data) => {
+            //console.log(data.data());
+            const ref = data.data();
+            this.favEvent = ref.favEvents;
+            //find weather the id is existed inside the array
+            if(!this.favEvent.some((ele) => ele === this.i)){
+                this.favEvent.push(this.id);
+                //console.log(ref.favEvents);
+                db.collection('user').doc(currentUser.uid).update({
+                    favEvents: this.favEvent
+                })
+                alert("This event is added to your favourite.")
+            }else{
+                alert("This event is already in your favourite list.")
+            }
+        })
+        
+    }
   }
 };
 </script>
