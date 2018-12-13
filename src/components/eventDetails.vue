@@ -212,7 +212,7 @@ export default {
             const ref = data.data();
             this.favEvent = ref.favEvents;
             //find weather the id is existed inside the array
-            if(!this.favEvent.some((ele) => ele === this.i)){
+            if(!this.favEvent.some((ele) => ele === this.id)){
                 this.favEvent.push(this.id);
                 //console.log(ref.favEvents);
                 db.collection('user').doc(currentUser.uid).update({
