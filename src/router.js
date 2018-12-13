@@ -115,7 +115,8 @@ router.beforeEach((to, from, next) => {
   // } else{
   //   console.log("currentUser : " + "null");
   // }
-  
+  console.log("currentUser: "+ currentUser.email);
+  console.log("requiresAuth: "+ requiresAuth);
   if (requiresAuth && !currentUser) next('login');
   // else if (!requiresAuth && currentUser) next(to.name);
   else next();
