@@ -6,7 +6,7 @@
 
 ### User (So Hon Chuen, Shum Hiu Tung)
 | Requirement | Progress |
-|--|--|--|
+|--|--|
 | 1. SignUp + Login | Need testing |
 | 2. List event in table (allow sorting) | Need testing |
 | 3. Search by one field | Need testing |
@@ -16,7 +16,7 @@
 
 ### Admin (Suen Ka Leong, Shum Hiu Tung)
 | Requirement | Progress |
-|--|--|--|
+|--|--|
 | 1. Flush Data | Need testing |
 | 2. CRUD event data | Need testing |
 | 3. CRUD user data | Need testing |
@@ -25,7 +25,7 @@
 
 ### Non-user (Shum Hiu Tung)
 | Requirement | Progress |
-|--|--|--|
+|--|--|
 | 1. Login + SignUp | Need testing |
 | 2. Login as admin | Need testing |
 
@@ -59,11 +59,11 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 2. Node.js Part:
-## run
+### run
 ```
 node server/server.js
 ```
-## hot-reloads
+### hot-reloads
 ```
 nodemon server/server.js
 ```
