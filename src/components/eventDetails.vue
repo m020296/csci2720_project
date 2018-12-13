@@ -7,19 +7,21 @@
         <v-card-title primary-title>
           <div>
             <v-layout row wrap text-xs-center>
-                <v-flex xs12 sm6>
-                    <v-btn flat color="indigo" @click="addFav">
-                        <v-icon>star</v-icon>
-                        <p>Add to favourite</p>
-                    </v-btn>
-                </v-flex>
-                <v-flex xs12 sm6>
-                    <v-btn left small color="primary" to="/events">Back</v-btn>
-                </v-flex>
-
+              <v-flex xs12 sm6>
+                <v-btn flat color="indigo" @click="addFav">
+                  <v-icon>star</v-icon>
+                  <p>Add to favourite</p>
+                </v-btn>
+              </v-flex>
+              <v-flex xs12 sm6>
+                <v-btn left small color="primary" to="/events">Back</v-btn>
+              </v-flex>
             </v-layout>
 
-            <h1>Title: <br><span>{{title}}</span></h1>
+            <h1>Title:
+              <br>
+              <span>{{title}}</span>
+            </h1>
             <div>
               <h3 class="headline mb-0">Datetime:
                 <br>
@@ -62,7 +64,7 @@
                 <img :src="item.avatar">
               </v-list-tile-avatar>-->
               <v-list-tile-content>
-                <v-list-tile-title v-html="item.username"></v-list-tile-title>
+                <v-list-tile-title v-html="item.username"><span v-html="item.timestamp"></span></v-list-tile-title>
                 <v-list-tile-sub-title v-html="item.comment"></v-list-tile-sub-title>
               </v-list-tile-content>
             </v-list-tile>
@@ -85,17 +87,19 @@
 
 <script>
 import firebase from "firebase";
+import { db } from "../main";
+
 export default {
   props: {},
   data: () => ({
     inputComment: "",
-    items: "",
+    items: [],
     id: "",
     title: "",
     datetime: "",
     organization: "",
     venue: "",
-    district: "",
+    district: ""
   }),
   created() {
     this.id = this.$route.params.id;
@@ -105,15 +109,111 @@ export default {
     this.venue = this.$route.params.venue;
     this.district = this.$route.params.district;
     //return comment here
-    this.items = "";
+    const cmRef = db.collection("comment");
+    cmRef
+      .where("eventID", "==", this.id)
+      .get()
+      .then(querySnapshot => {
+        let comment = [];
+        querySnapshot.docs.forEach(function(doc) {
+          // console.log("hi")
+          //   console.log("Test: " + doc.data()[field] + field + keyword);
+
+          //   if (doc.data()[eventI]) {
+          // console.log("---- " + doc.data()[field].indexOf(keyword) + " ----");
+
+          comment.push(doc.data());
+          //   }
+        });
+        this.items = comment;
+      });
   },
   methods: {
-      submitComment: function(cm){
-          console.log(cm)
-      }
-addFav: function() {
+    submitComment: function(cm) {
+      console.log(cm);
+      if (cm.length == 0) {
+        console.log("no comment");
+        alert("Cannot leave empty comment");
+      } else {
+        let username = "";
+        let eventID = this.$route.params.id;
+        const currentUser = firebase.auth().currentUser;
+        const usersRef = db.collection("user");
 
-}
+        usersRef
+          .where("email", "==", currentUser.email)
+          .limit(1)
+          .get()
+          .then(querySnapshot => {
+            username = querySnapshot.docs[0].data().username;
+
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+            var hh = today.getHours();
+            var minute = today.getMinutes();
+
+            if (dd < 10) {
+              dd = "0" + dd;
+            }
+
+            if (mm < 10) {
+              mm = "0" + mm;
+            }
+
+            today = mm + "/" + dd + "/" + yyyy + " " + hh + ":" + minute;
+            // document.write(today);
+            console.log(
+              "Commenting user: " +
+                username +
+                " eID: " +
+                eventID +
+                " CM: " +
+                cm +
+                " time: " +
+                today
+            );
+
+            const cmRef = db.collection("comment");
+
+            let tempCM = {
+              username: username,
+              timestamp: today,
+              eventID: eventID,
+              comment: cm
+            };
+
+            cmRef.add(tempCM).then(docRef => {
+              console.log(tempCM);
+              console.log("New Comment Added.");
+              this.update();
+
+            });
+          });
+      }
+    },
+    update: function() {
+      const cmRef = db.collection("comment");
+      cmRef
+        .where("eventID", "==", this.id)
+        .get()
+        .then(querySnapshot => {
+          let comment = [];
+          querySnapshot.docs.forEach(function(doc) {
+            // console.log("hi")
+            //   console.log("Test: " + doc.data()[field] + field + keyword);
+
+            //   if (doc.data()[eventI]) {
+            // console.log("---- " + doc.data()[field].indexOf(keyword) + " ----");
+
+            comment.push(doc.data());
+            //   }
+          });
+          this.items = comment;
+        });
+    },
+    addFav: function() {}
   }
 };
 </script>
