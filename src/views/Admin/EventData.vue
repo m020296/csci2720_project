@@ -62,12 +62,12 @@
       <v-btn @click="logout" light>Logout</v-btn>
     </v-toolbar> 
 
-   <br><br>
+ <v-content>
   <v-container fluid fill-height>
         <v-layout align-start justify-center>
           <v-flex xs12 sm12 md12>
             <v-card class="elevation-12">
- <v-content>
+ 
   <div>
     <v-toolbar flat color="white">
       <v-toolbar-title>List of Activities</v-toolbar-title>
@@ -148,13 +148,13 @@
     </v-data-table>
     
   </div>
-</v-content>
+
 
 </v-card>
 </v-flex>
 </v-layout>
 </v-container>
-
+</v-content>
     <v-footer color="indigo" app>
       <span class="white--text">&copy; 2018</span>
       

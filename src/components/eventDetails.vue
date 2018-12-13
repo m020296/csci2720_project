@@ -6,10 +6,20 @@
 
         <v-card-title primary-title>
           <div>
-            <h1>Title:
-              <br>
-              <span>{{title}}</span>
-            </h1>
+            <v-layout row wrap text-xs-center>
+                <v-flex xs12 sm6>
+                    <v-btn flat color="indigo" @click="addFav">
+                        <v-icon>star</v-icon>
+                        <p>Add to favourite</p>
+                    </v-btn>
+                </v-flex>
+                <v-flex xs12 sm6>
+                    <v-btn left small color="primary" to="/events">Back</v-btn>
+                </v-flex>
+
+            </v-layout>
+
+            <h1>Title: <br><span>{{title}}</span></h1>
             <div>
               <h3 class="headline mb-0">Datetime:
                 <br>
@@ -75,7 +85,6 @@
 
 <script>
 import firebase from "firebase";
-import { db } from "../main";
 export default {
   props: {},
   data: () => ({
@@ -102,6 +111,9 @@ export default {
       submitComment: function(cm){
           console.log(cm)
       }
+addFav: function() {
+
+}
   }
 };
 </script>
