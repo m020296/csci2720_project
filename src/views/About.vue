@@ -133,6 +133,7 @@
             - Great GUI of the database console<br>
             Disadvantages: <br>
             - does not provide high performance like MongoDB<br>
+            - there is daily usage limit (50K read operations)<br>
             - Firebase Admin SDK only support some programming language, that's why we need an extra Node.js server<br>
 </v-card-text></v-card></v-flex>
 

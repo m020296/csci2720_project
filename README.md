@@ -86,19 +86,14 @@ Node.js Express
 Vue.js Vuetify.js
 
 	Advantages: - the coding is simplier than Angular
-
-				- the size is smaller than Angular
-
+			- the size is smaller than Angular
 	Disadvantages: - a new frameworks with not much resources in the Internet
-
-				   - WE DIDN'T LEARN VUE.JS IN CLASS, use more time to learn
+				- WE DIDN'T LEARN VUE.JS IN CLASS, use more time to learn
 
 Firebase
 
 	Advantages: - Authenication of the application can be easily done
-
-				- Great GUI of the database console
-
+			- Great GUI of the database console
 	Disadvantages: - does not provide high performance like MongoDB
-	
-				   - Firebase Admin SDK only support some programming language, that's why we need an extra Node.js server
+				- there is daily usage limit (50K read operations)
+				- Firebase Admin SDK only support some programming language, that's why we need an extra Node.js server
