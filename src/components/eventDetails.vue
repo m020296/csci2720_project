@@ -53,7 +53,7 @@
               </v-list-tile-avatar>
               <v-list-tile-content>
                 <v-list-tile-title><span v-html="item.username" class="font-weight-bold" ></span>&nbsp;&nbsp;<span v-html="item.comment"></span></v-list-tile-title>
-                <v-list-tile-sub-title  v-html="item.timestamp"></v-list-tile-sub-title>
+                <v-list-tile-sub-title  v-html="item.datetime"></v-list-tile-sub-title>
               </v-list-tile-content>
             </v-list-tile>
             <v-divider :key="index"></v-divider>
@@ -151,6 +151,14 @@ export default {
               mm = "0" + mm;
             }
 
+            if(minute < 10){
+                minute = "0" + minute
+            }
+
+            if(hh < 10){
+                hh = "0" + hh
+            }
+
             today = mm + "/" + dd + "/" + yyyy + " " + hh + ":" + minute;
             // document.write(today);
             console.log(
@@ -168,7 +176,7 @@ export default {
 
             let tempCM = {
               username: username,
-              timestamp: today,
+              datetime: today,
               eventID: eventID,
               comment: cm
             };
@@ -185,19 +193,17 @@ export default {
     update: function() {
       const cmRef = db.collection("comment");
       cmRef
+        .orderBy("date", 'desc')
         .where("eventID", "==", this.id)
         .get()
         .then(querySnapshot => {
           let comment = [];
           querySnapshot.docs.forEach(function(doc) {
-            // console.log("hi")
-            //   console.log("Test: " + doc.data()[field] + field + keyword);
-
-            //   if (doc.data()[eventI]) {
-            // console.log("---- " + doc.data()[field].indexOf(keyword) + " ----");
-
+            
+            // doc.data().timestamp = doc.data().timestamp.toDate()
+            // console.log(doc.data().timestamp.toDate().toString())
             comment.push(doc.data());
-            //   }
+            
           });
           this.items = comment;
         });
