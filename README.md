@@ -5,29 +5,29 @@
 ## Project Requirement
 
 ### User (So Hon Chuen, Shum Hiu Tung)
-| Requirement | Progress | Done by |
+| Requirement | Progress |
 |--|--|--|
-| 1. SignUp + Login | Need testing | Shum Hiu Tung |
-| 2. List event in table (allow sorting) | Need testing | Shum Hiu Tung |
-| 3. Search by one field | Need testing | Shum Hiu Tung |
-| 4. Separate view of a event: detail + comment(non-threaded) | **Need Fix** |
+| 1. SignUp + Login | Need testing |
+| 2. List event in table (allow sorting) | Need testing |
+| 3. Search by one field | Need testing |
+| 4. Separate view of a event: detail + comment(non-threaded) | **Need Fix**(comment orderby time) |
 | 5. Add event to favourite + see list in another view |  |
-| 6. See user name in top right corner + Logout | Need testing | Shum Hiu Tung |
+| 6. See user name in top right corner + Logout | Need testing |
 
 ### Admin (Suen Ka Leong, Shum Hiu Tung)
-| Requirement | Progress | Responsible |
+| Requirement | Progress |
 |--|--|--|
-| 1. Flush Data | Need testing | Suen Ka Leong |
-| 2. CRUD event data | Need testing | Suen Ka Leong |
-| 3. CRUD user data | Need testing | Suen Ka Leong, Shum Hiu Tung |
-| 4. Load CSV | Need testing | Suen Ka Leong |
-| 5. Logout | Need testing | Shum Hiu Tung |
+| 1. Flush Data | Need testing |
+| 2. CRUD event data | Need testing |
+| 3. CRUD user data | Need testing |
+| 4. Load CSV | Need testing |
+| 5. Logout | Need testing |
 
 ### Non-user (Shum Hiu Tung)
-| Requirement | Progress | Done by |
+| Requirement | Progress |
 |--|--|--|
-| 1. Login + SignUp | Need testing | Shum Hiu Tung |
-| 2. Login as admin | Need testing | Shum Hiu Tung |
+| 1. Login + SignUp | Need testing |
+| 2. Login as admin | Need testing |
 
 
 ## Project setup
@@ -85,15 +85,19 @@ Node.js Express
 
 Vue.js Vuetify.js
 
-	Advantages: - the coding is simplier than Angular
-			- the size is smaller than Angular
-	Disadvantages: - a new frameworks with not much resources in the Internet
-				- WE DIDN'T LEARN VUE.JS IN CLASS, use more time to learn
+	Advantages: 
+		- the coding is simplier than Angular
+		- the size is smaller than Angular
+	Disadvantages: 
+		- a new frameworks with not much resources in the Internet
+		- WE DIDN'T LEARN VUE.JS IN CLASS, use more time to learn
 
 Firebase
 
-	Advantages: - Authenication of the application can be easily done
-			- Great GUI of the database console
-	Disadvantages: - does not provide high performance like MongoDB
-				- there is daily usage limit (50K read operations)
-				- Firebase Admin SDK only support some programming language, that's why we need an extra Node.js server
+	Advantages: 
+		- Authenication of the application can be easily done
+		- Great GUI of the database console
+	Disadvantages: 
+		- does not provide high performance like MongoDB
+		- there is daily usage limit (50K read operations)
+		- Firebase Admin SDK only support some programming language, that's why we need an extra Node.js server
