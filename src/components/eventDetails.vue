@@ -1,6 +1,7 @@
 <template>
-  <v-layout>
-    <v-flex xs12 sm6 offset-sm3>
+  <v-content>
+  <v-layout align-start justify-center>
+    <v-flex xs12 sm8>
       <v-card>
         <v-img src="https://cdn.vuetifyjs.com/images/cards/desert.jpg" aspect-ratio="2.75"></v-img>
 
@@ -8,63 +9,50 @@
           <div>
             <v-layout row wrap text-xs-center>
               <v-flex xs12 sm6>
-                <v-btn flat color="indigo" @click="addFav">
-                  <v-icon>star</v-icon>
-                  <p>Add to favourite</p>
-                </v-btn>
+                <v-btn flat color="indigo" to="/events">Back</v-btn>
               </v-flex>
               <v-flex xs12 sm6>
-                <v-btn left small color="primary" to="/events">Back</v-btn>
+                <v-btn flat color="primary" @click="addFav">
+                  <v-icon>star</v-icon> Add to favourite
+                </v-btn>
               </v-flex>
             </v-layout>
-
-            <h1>Title:
-              <br>
-              <span>{{title}}</span>
-            </h1>
+            <v-divider ></v-divider>
+        <v-divider ></v-divider>
+            <h2>{{title}}</h2><br>
             <div>
-              <h3 class="headline mb-0">Datetime:
-                <br>
-                <span class="font-weight-bold">{{datetime}}</span>
-              </h3>
               <br>
-              <h3 class="headline mb-0">Organization:
-                <br>
-                <span class="font-weight-bold">{{organization}}</span>
-              </h3>
-              <br>
-              <h3 class="headline mb-0">Venue:
-                <br>
-                <span class="font-weight-bold">{{venue}}</span>
-              </h3>
-              <br>
-              <h3 class="headline mb-0">District:
-                <br>
-                <span class="font-weight-bold">{{district}}</span>
-              </h3>
+              <h4>Datetime</h4>
+              <span class="font-weight">{{datetime}}</span><br><br>
+              
+              <h4>Organization</h4>
+              <span class="font-weight">{{organization}}</span><br><br>
+              
+              <h4>Venue</h4>
+              <span class="font-weight">{{venue}}</span><br><br>
+              
+              <h4>District</h4>
+              <span class="font-weight">{{district}}</span><br><br>
             </div>
           </div>
         </v-card-title>
+        <v-divider ></v-divider>
+        <v-divider ></v-divider>
+        <v-card-text>
+          <v-flex text-xs-center xs12 sm12 md12>
+            Comments
+          </v-flex>
+        </v-card-text>
+        <v-divider ></v-divider>
 
-        <v-divider inset></v-divider>
-        <v-card-title primary-title>
-          <h1>Comment Session</h1>
-        </v-card-title>
-
-        <v-list two-line>
+        <v-list two-line light>
           <template v-for="(item, index) in items">
-            <!-- <v-subheader
-              v-if="item.header"
-              :key="item.header"
-            >
-              {{ item.header }}
-            </v-subheader>-->
             <v-list-tile :key="item.title">
-              <!-- <v-list-tile-avatar>
-                <img :src="item.avatar">
-              </v-list-tile-avatar>-->
+              <v-list-tile-avatar>
+                <v-icon>directions_run</v-icon>
+              </v-list-tile-avatar>
               <v-list-tile-content>
-                <v-list-tile-title v-html="item.username" style="text-decoration: underline"></v-list-tile-title><span v-html="item.comment"></span>
+                <v-list-tile-title><span v-html="item.username" class="font-weight-bold" ></span>&nbsp;&nbsp;<span v-html="item.comment"></span></v-list-tile-title>
                 <v-list-tile-sub-title  v-html="item.timestamp"></v-list-tile-sub-title>
               </v-list-tile-content>
             </v-list-tile>
@@ -74,15 +62,16 @@
 
         <v-card-actions>
           <v-flex xs12>
-            <v-textarea v-model="inputComment" outline name="input-7-4" label="Outline textarea"></v-textarea>
+            <v-textarea v-model="inputComment" outline name="input-7-4" label="Comments..."></v-textarea>
             <div>
-              <v-btn @click="submitComment(inputComment)" align-end color="info">Submit Comment</v-btn>
+              <v-btn @click="submitComment(inputComment)" align-end color="info">Submit</v-btn>
             </div>
           </v-flex>
         </v-card-actions>
       </v-card>
     </v-flex>
   </v-layout>
+</v-content>
 </template>
 
 <script>
