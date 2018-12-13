@@ -97,7 +97,7 @@ export default {
             //     .signInWithEmailAndPassword(querySnapshot.data().email, this.password)
             //     .then(
             //       user => {
-            //         // this.$router.replace("welcome");
+            //         // this.$router.push("welcome");
             //         // alert("login-ed")
             //       },
             //       err => {
@@ -116,7 +116,7 @@ export default {
         .auth()
         .signOut()
         .then(() => {
-          this.$router.replace("login");
+          this.$router.push("login");
         });
     }
   }

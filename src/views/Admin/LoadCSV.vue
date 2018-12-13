@@ -143,22 +143,22 @@ export default {
   },
   methods: {
     logout: function() {
-      this.$router.replace("login");
+      this.$router.push("login");
     },
     admin: function(){
-      this.$router.replace("admin");
+      this.$router.push("admin");
     },
     flushData: function(){
-      this.$router.replace("flushData");
+      this.$router.push("flushData");
     },
     loadCSV: function(){
-      this.$router.replace("loadCSV");
+      this.$router.push("loadCSV");
     },
     eventData: function(){
-      this.$router.replace("eventData");
+      this.$router.push("eventData");
     },
     userData: function(){
-      this.$router.replace("userData");
+      this.$router.push("userData");
     },
     fileChanged (file) {
       console.log(file);
@@ -211,7 +211,7 @@ export default {
       }))
       Promise.all(promises).then(function(){
         alert("Data saved! Saved "+count+" records.");
-        setTimeout(function(){  vm.$router.replace("eventData"); }, 500);
+        setTimeout(function(){  vm.$router.push("eventData"); }, 500);
       })
 }
   }
