@@ -11,9 +11,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 var admin = require('firebase-admin');
 var serviceAccount = require('./serviceAccountKey.json');
+var serviceAccount_backup = require('./serviceAccountKey_backup.json');
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert(serviceAccount_backup),
   databaseURL: 'https://project2720-eafa3.firebaseio.com'
 });
 

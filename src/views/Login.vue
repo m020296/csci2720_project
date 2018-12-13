@@ -89,7 +89,7 @@ export default {
               )
               .then(
                 user => {
-                  this.$router.replace("welcome");
+                  this.$router.replace("events");
                   // alert("login-ed")
                 },
                 err => {

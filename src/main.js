@@ -11,13 +11,24 @@ import VeeValidate from 'vee-validate';
 Vue.use(VueFire);
 Vue.use(axios);
 Vue.use(VeeValidate);
+
+// var config = {
+//   apiKey: "AIzaSyBIjnXNtVGp_4K4wBKC4I3bF9uj17n0WfM",
+//   authDomain: "project2720-eafa3.firebaseapp.com",
+//   databaseURL: "https://project2720-eafa3.firebaseio.com",
+//   projectId: "project2720-eafa3",
+//   storageBucket: "project2720-eafa3.appspot.com",
+//   messagingSenderId: "359893870297"
+// };
+
+//backup firebase project
 var config = {
-  apiKey: "AIzaSyBIjnXNtVGp_4K4wBKC4I3bF9uj17n0WfM",
-  authDomain: "project2720-eafa3.firebaseapp.com",
-  databaseURL: "https://project2720-eafa3.firebaseio.com",
-  projectId: "project2720-eafa3",
-  storageBucket: "project2720-eafa3.appspot.com",
-  messagingSenderId: "359893870297"
+  apiKey: "AIzaSyA7HGB9WW_UpgfxmSBHtEqJtzLNmIE-SmU",
+  authDomain: "backup-a7bf7.firebaseapp.com",
+  databaseURL: "https://backup-a7bf7.firebaseio.com",
+  projectId: "backup-a7bf7",
+  storageBucket: "backup-a7bf7.appspot.com",
+  messagingSenderId: "857548580000"
 };
 
 firebase.initializeApp(config);
