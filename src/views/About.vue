@@ -12,7 +12,7 @@
             <v-card class="elevation-12">
     <v-card-text>
     
-        <h1>CSCI 2720 Project</h1>
+        <h1># csci2720_project</h1>
     </v-card-text>
     </v-card>
 </v-flex>
@@ -21,89 +21,44 @@
     <v-card-text>
     
         <h3>1. Names and workload distribution of each group member</h3>
-        
-<table class="tg">
-  <tr>
-    <th class="tg-b9z8" colspan="2">User Functions</th>
-  </tr>
-  <tr>
-    <td class="tg-846h">Requirement</td>
-    <td class="tg-846h">Done by</td>
-  </tr>
-  <tr>
-    <td class="tg-gvcd">1. SignUp + Login</td>
-    <td class="tg-v0nz">Shum Hiu Tung</td>
-  </tr>
-  <tr>
-    <td class="tg-eygw">2. List event in table (allow sorting)</td>
-    <td class="tg-cz0u">Shum Hiu Tung</td>
-  </tr>
-  <tr>
-    <td class="tg-gvcd">3. Search by one field</td>
-    <td class="tg-v0nz">Shum Hiu Tung</td>
-  </tr>
-  <tr>
-    <td class="tg-eygw">4. Separate view of a event: detail + comment(non-threaded)</td>
-    <td class="tg-cz0u">Shum Hiu Tung</td>
-  </tr>
-  <tr>
-    <td class="tg-gvcd">5. Add event to favourite + see list in another view</td>
-    <td class="tg-v0nz"></td>
-  </tr>
-  <tr>
-    <td class="tg-eygw">6. See user name in top right corner + Logout</td>
-    <td class="tg-cz0u">Shum Hiu Tung</td>
-  </tr>
-</table>
-
-<br>
-<table class="tg">
-  <tr>
-    <th class="tg-b9z8" colspan="2">Admin Functions</th>
-  </tr>
-  <tr>
-    <td class="tg-846h">Requirement</td>
-    <td class="tg-846h">Done by</td>
-  </tr>
-  <tr>
-    <td class="tg-gvcd">1. Flush Data</td>
-    <td class="tg-v0nz">Suen Ka Leong</td>
-  </tr>
-  <tr>
-    <td class="tg-eygw">2. CRUD event data</td>
-    <td class="tg-cz0u">Suen Ka Leong</td>
-  </tr>
-  <tr>
-    <td class="tg-gvcd">3. CRUD user data</td>
-    <td class="tg-v0nz">Suen Ka Leong, Shum Hiu Tung</td>
-  </tr>
-  <tr>
-    <td class="tg-eygw">4. Load CSV</td>
-    <td class="tg-cz0u">Suen Ka Leong</td>
-  </tr>
-  <tr>
-    <td class="tg-gvcd">5. Logout</td>
-    <td class="tg-v0nz">Suen Ka Leong</td>
-  </tr>
-</table>
-<br>
-<table class="tg">
-  <tr>
-    <th class="tg-b9z8" colspan="2">Non-user Functions</th>
-  </tr>
-  <tr>
-    <td class="tg-846h">Requirement</td>
-    <td class="tg-846h">Done by</td>
-  </tr>
-  <tr>
-    <td class="tg-gvcd">1. Login + SignUp</td>
-    <td class="tg-v0nz">Shum Hiu Tung</td>
-  </tr>
-  <tr>
-    <td class="tg-eygw">2. Login as admin</td>
-    <td class="tg-cz0u">Suen Ka Leong</td>
-  </tr>
-</table>
+        <table>
+            <thead>
+              <tr>
+                <th>
+                  Names
+                </th>
+                <th>
+                  Workload
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  Shum Hiu Tung  
+                </td>
+                <td>
+                    Admin + User + Non-User
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  So Hon Chuen  
+                </td>
+                <td>
+                    User 
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Suen Ka Leong  
+                </td>
+                <td>
+                    Admin + User
+                </td>
+              </tr>
+            </tbody>
+          </table>
     </v-card-text>
     </v-card>
 </v-flex>
@@ -210,15 +165,5 @@ th, td {
   min-width: 120px;
   padding: 10px 20px;
 } */
-
-.tg  {border-collapse:collapse;border-spacing:0;border-color:#aabcfe;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#aabcfe;color:#669;background-color:#e8edff;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#aabcfe;color:#039;background-color:#b9c9fe;}
-.tg .tg-gvcd{background-color:#ffffff;color:#000000;border-color:#000000;text-align:left;vertical-align:top}
-.tg .tg-eygw{background-color:#ffffff;color:#000000;border-color:#000000;text-align:left;vertical-align:top}
-.tg .tg-846h{background-color:#ecf4ff;font-weight:bold;color:#000000;border-color:#000000;text-align:center;vertical-align:top}
-.tg .tg-v0nz{background-color:#ffffff;color:#000000;border-color:#000000;text-align:center;vertical-align:top}
-.tg .tg-b9z8{font-weight:bold;background-color:#ecf4ff;color:#000000;border-color:#000000;text-align:center;vertical-align:top}
-.tg .tg-cz0u{background-color:#ffffff;color:#000000;border-color:#000000;text-align:center;vertical-align:top}
 
 </style>
