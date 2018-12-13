@@ -9,7 +9,7 @@
           <div>
             <v-layout row wrap text-xs-center>
               <v-flex xs12 sm6>
-                <v-btn flat color="indigo" to="/events">Back</v-btn>
+                <v-btn flat color="indigo" @click="backPre">Back</v-btn>
               </v-flex>
               <v-flex xs12 sm6>
                 <v-btn flat color="primary" @click="addFav">
@@ -244,6 +244,9 @@ export default {
             }
         })
         
+    },
+    backPre: function() {
+      window.history.go(-1);
     }
   }
 };
