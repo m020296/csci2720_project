@@ -21,25 +21,25 @@ Vue.use(VeeValidate);
 //   messagingSenderId: "359893870297"
 // };
 
-//backup firebase project
-// var config = {
-//   apiKey: "AIzaSyA7HGB9WW_UpgfxmSBHtEqJtzLNmIE-SmU",
-//   authDomain: "backup-a7bf7.firebaseapp.com",
-//   databaseURL: "https://backup-a7bf7.firebaseio.com",
-//   projectId: "backup-a7bf7",
-//   storageBucket: "backup-a7bf7.appspot.com",
-//   messagingSenderId: "857548580000"
-// };
+// backup firebase project
+var config = {
+  apiKey: "AIzaSyA7HGB9WW_UpgfxmSBHtEqJtzLNmIE-SmU",
+  authDomain: "backup-a7bf7.firebaseapp.com",
+  databaseURL: "https://backup-a7bf7.firebaseio.com",
+  projectId: "backup-a7bf7",
+  storageBucket: "backup-a7bf7.appspot.com",
+  messagingSenderId: "857548580000"
+};
 
 //bak2
-var config = {
-    apiKey: "AIzaSyD10c-E8Gyu6KaBZSwgqVrET4YI_5XjqS8",
-    authDomain: "back2-2f39f.firebaseapp.com",
-    databaseURL: "https://back2-2f39f.firebaseio.com",
-    projectId: "back2-2f39f",
-    storageBucket: "back2-2f39f.appspot.com",
-    messagingSenderId: "387196796111"
-  };
+// var config = {
+//     apiKey: "AIzaSyD10c-E8Gyu6KaBZSwgqVrET4YI_5XjqS8",
+//     authDomain: "back2-2f39f.firebaseapp.com",
+//     databaseURL: "https://back2-2f39f.firebaseio.com",
+//     projectId: "back2-2f39f",
+//     storageBucket: "back2-2f39f.appspot.com",
+//     messagingSenderId: "387196796111"
+//   };
 
 firebase.initializeApp(config);
 
