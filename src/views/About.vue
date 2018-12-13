@@ -12,7 +12,7 @@
             <v-card class="elevation-12">
     <v-card-text>
     
-        <h1># csci2720_project</h1>
+        <h1>CSCI 2720 Project</h1>
     </v-card-text>
     </v-card>
 </v-flex>

@@ -64,8 +64,8 @@
                 <img :src="item.avatar">
               </v-list-tile-avatar>-->
               <v-list-tile-content>
-                <v-list-tile-title v-html="item.username"><span v-html="item.timestamp"></span></v-list-tile-title>
-                <v-list-tile-sub-title v-html="item.comment"></v-list-tile-sub-title>
+                <v-list-tile-title v-html="item.username" style="text-decoration: underline"></v-list-tile-title><span v-html="item.comment"></span>
+                <v-list-tile-sub-title  v-html="item.timestamp"></v-list-tile-sub-title>
               </v-list-tile-content>
             </v-list-tile>
             <v-divider :key="index"></v-divider>
@@ -121,7 +121,7 @@ export default {
 
           //   if (doc.data()[eventI]) {
           // console.log("---- " + doc.data()[field].indexOf(keyword) + " ----");
-
+            console.log(doc.data()["timestamp"])
           comment.push(doc.data());
           //   }
         });
@@ -188,7 +188,7 @@ export default {
               console.log(tempCM);
               console.log("New Comment Added.");
               this.update();
-
+              this.inputComment = ""
             });
           });
       }
