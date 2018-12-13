@@ -105,8 +105,8 @@
 
                       <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-                        <v-btn color="blue darken-1" flat @click.native="save">Save</v-btn>
+                        <v-btn v-bind:disabled="btnDisable" color="blue darken-1" flat @click.native="close">Cancel</v-btn>
+                        <v-btn v-bind:disabled="btnDisable" color="blue darken-1" flat @click.native="save">Save</v-btn>
                       </v-card-actions>
                     </v-card>
                   </v-dialog>
@@ -150,6 +150,7 @@ export default {
   },
   data: () => ({
     drawer: null,
+    btnDisable: false,
     dialog: false,
     headers: [
       { text: "Username", value: "username", sortable: false },
@@ -317,6 +318,7 @@ export default {
       }
     },
     close() {
+      this.btnDisable = false;
       this.dialog = false;
       setTimeout(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
@@ -325,6 +327,7 @@ export default {
     },
 
     save() {
+      this.btnDisable = true;
       if (this.editedIndex > -1) {
         console.log("edit user");
         var vm = this;
