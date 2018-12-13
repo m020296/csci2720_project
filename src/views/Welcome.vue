@@ -33,8 +33,8 @@
       <v-btn @click="logout" color="primary">Logout</v-btn>
     </v-toolbar>
 
-    <v-content id="userContent">
-      <v-container fluid fill-height>
+    <v-content id="userContent" >
+      <v-container fluid fill-height align-center>
         <!--<component v-bind:is="component"></component>-->
         <router-view></router-view>
       </v-container>

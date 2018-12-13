@@ -11,7 +11,7 @@
                   <v-divider class="mx-2" inset vertical></v-divider>
                   <v-spacer></v-spacer>
 
-                  <v-toolbar dense>
+                  <v-toolbar dense style="flex-basis: 60%">
                     <v-overflow-btn
                       :items="dropdown_edit"
                       v-model="searchField"
@@ -19,6 +19,7 @@
                       hide-details
                       class="pa-0"
                       overflow
+                      
                     ></v-overflow-btn>
 
                     <v-text-field
@@ -86,7 +87,7 @@ import { db } from "../main";
 export default {
   data: () => ({
     dropdown_edit: ["Title", "District", "Venue", "Organization", "Datetime"],
-    searchField: "Field",
+    searchField: "Title",
     keyword: "",
     drawer: null,
     dialog: false,
