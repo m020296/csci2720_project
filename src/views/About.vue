@@ -12,7 +12,7 @@
             <v-card class="elevation-12">
     <v-card-text>
     
-        <h1># csci2720_project</h1>
+        <h1># csci2720_project</h1><hr>
     </v-card-text>
     </v-card>
 </v-flex>
@@ -20,7 +20,7 @@
             <v-card class="elevation-12">
     <v-card-text>
     
-        <h3>1. Names and workload distribution of each group member</h3>
+        <h3>1. Names and workload distribution of each group member</h3><hr>
         <table>
             <thead>
               <tr>
@@ -93,14 +93,14 @@
         ```<br>
 
         <h5>### Customize configuration</h5>
-        See [Configuration Reference](https://cli.vuejs.org/config/).<br>
+        See [Configuration Reference](https://cli.vuejs.org/config/).<br><br>
 
         <h4>## 2. Node.js Part:</h4>
-        <h5>## run</h5>
+        <h5>### run</h5>
         ```<br>
         node server/server.js<br>
         ```<br>
-        <h5>## hot-reloads</h5>
+        <h5>### hot-reloads</h5>
         ```<br>
         nodemon server/server.js<br>
         ```<br>
@@ -108,31 +108,33 @@
 <v-flex xs12 sm12 md12 text-xs-left ma-3>
             <v-card class="elevation-12">
                 <v-card-text>
-        <h3>3. Design of data schemas and models of your database</h3><hr>
-        There are two collections in the database: event, user<br>
-        user(String username, String email, Array favEvents)<br>
-        event(String title, String datetime, String organization, String venue, String district)<br>
-        For user password, it is saved in the Authenication of the Firebase. The password is automaticaly hashed by Firebase.<br>
+        <h3>3. Design of data schemas and models of your database</h3>
+        <hr>There are three collections in the database: event, user, comment:
+        <br><br> user (String username, String email, Array favEvents)
+        <br> event (String title, String datetime, String organization, String venue, String district)
+        <br> comment (String username, String eventID, String comment, String timestamp)
+        <br><br>For user password, it is saved in the Authenication of the Firebase. The password is automaticaly hashed by Firebase.
 
 </v-card-text></v-card></v-flex>
 <v-flex xs12 sm12 md12 text-xs-left ma-3>
             <v-card class="elevation-12">
                 <v-card-text>
         <h3>4. Technologies and frameworks/libraries in use</h3><hr>
-        <h5>Node.js Express</h5>
+        <h5>Node.js Express</h5><br>
         <h5>Vue.js Vuetify.js</h5>
             Advantages: <br>
             - the coding is simplier than Angular<br>
             - the size is smaller than Angular<br>
-            Disadvantages:
+            Disadvantages:<br>
             - a new frameworks with not much resources in the Internet<br>
-            - WE DIDN'T LEARN VUE.JS IN CLASS, use more time to learn<br>
+            - WE DIDN'T LEARN VUE.JS IN CLASS, use more time to learn<br><br>
         <h5>Firebase</h5>
             Advantages: <br>
             - Authenication of the application can be easily done<br>
             - Great GUI of the database console<br>
             Disadvantages: <br>
             - does not provide high performance like MongoDB<br>
+            - there is daily usage limit (50K read operations)<br>
             - Firebase Admin SDK only support some programming language, that's why we need an extra Node.js server<br>
 </v-card-text></v-card></v-flex>
 
