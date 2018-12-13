@@ -9,7 +9,20 @@
 
         <v-card-title primary-title>
           <div>
-            <h1 >Title: <br><span>{{title}}</span></h1>
+            <v-layout row wrap text-xs-center>
+                <v-flex xs12 sm6>
+                    <v-btn flat color="indigo" @click="addFav">
+                        <v-icon>star</v-icon>
+                        <p>Add to favourite</p>
+                    </v-btn>
+                </v-flex>
+                <v-flex xs12 sm6>
+                    <v-btn left small color="primary" to="/events">Back</v-btn>
+                </v-flex>
+
+            </v-layout>
+
+            <h1>Title: <br><span>{{title}}</span></h1>
             <div>
                 
                 <h3 class="headline mb-0">Datetime: <br><span class="font-weight-bold">{{datetime}}</span></h3>
@@ -23,7 +36,9 @@
             
           </div>
           <v-divider ></v-divider>
-          
+          <v-layout row class="mt-5">
+                
+          </v-layout>
         </v-card-title>
 
         
@@ -35,7 +50,6 @@
 
 <script>
 import firebase from "firebase";
-import { db } from "../main";
 export default {
     props:{
         
@@ -55,6 +69,11 @@ export default {
         this.organization = this.$route.params.organization;
         this.venue = this.$route.params.venue;
         this.district = this.$route.params.district;
+    },
+    methods: {
+        addFav: function() {
+           
+        }
     }
 }
 </script>
