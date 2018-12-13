@@ -109,9 +109,10 @@
             <v-card class="elevation-12">
                 <v-card-text>
         <h3>3. Design of data schemas and models of your database</h3><hr>
-        There are two collections in the database: event, user<br>
-        user(String username, String email, Array favEvents)<br>
-        event(String title, String datetime, String organization, String venue, String district)<br>
+        There are three collections in the database: event, user, comment<br>
+          user (String username, String email, Array favEvents)<br>
+          event (String title, String datetime, String organization, String venue, String district)<br>
+          comment (String username, String eventID, String comment, String timestamp)<br>
         For user password, it is saved in the Authenication of the Firebase. The password is automaticaly hashed by Firebase.<br>
 
 </v-card-text></v-card></v-flex>

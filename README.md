@@ -69,17 +69,17 @@ nodemon server/server.js
 ```
 
 
-3. Design of data schemas and models of your database
+## Design of data schemas and models of your database
 
-There are two collections in the database: event, user
-
-user(String username, String email, Array favEvents)
-
-event(String title, String datetime, String organization, String venue, String district)
+There are three collections in the database: event, user, comment:
+	
+	user (String username, String email, Array favEvents)
+	event (String title, String datetime, String organization, String venue, String district)
+	comment (String username, String eventID, String comment, String timestamp)
 
 For user password, it is saved in the Authenication of the Firebase. The password is automaticaly hashed by Firebase.
 
-4. Technologies and frameworks/libraries in use
+## Technologies and frameworks/libraries in use
 
 Node.js Express
 
