@@ -1,8 +1,15 @@
 <template>
-    <v-container>
+    <v-content>
+  <v-container fluid fill-height>
+        <v-layout align-start justify-center>
+          <v-flex xs12 sm12 md12>
+            <v-card class="elevation-12">
+             <div>
+                <v-toolbar flat color="white">
         <v-toolbar-title>List of Your Favourite</v-toolbar-title>
         <v-divider class="mx-2" inset vertical></v-divider>
         <v-spacer></v-spacer>
+    </v-toolbar>
         <v-data-table
                   :headers="headers"
                   :items="eventContent"
@@ -20,7 +27,7 @@
                     </td>
                   </template>
                 </v-data-table>
-    </v-container>
+    </div></v-card></v-flex></v-layout></v-container></v-content>
 </template>
 
 <script>
