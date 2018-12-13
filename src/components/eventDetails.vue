@@ -64,7 +64,7 @@
           <v-flex xs12>
             <v-textarea v-model="inputComment" outline name="input-7-4" label="Comments..."></v-textarea>
             <div>
-              <v-btn @click="submitComment(inputComment)" align-end color="info">Submit</v-btn>
+              <v-btn v-bind:disabled="btnDisable" @click="submitComment(inputComment)" align-end color="info">Submit</v-btn>
             </div>
           </v-flex>
         </v-card-actions>
@@ -89,8 +89,14 @@ export default {
     organization: "",
     venue: "",
     district: "",
-    favEvent: []
+    favEvent: [],
+    btnDisable: false
   }),
+  firestore () {
+    return {
+      items: db.collection('comment').where("eventID", "==", this.$route.params.id).orderBy('timestamp')
+    }
+  },
   created() {
     this.id = this.$route.params.id;
     this.title = this.$route.params.title;
@@ -99,24 +105,26 @@ export default {
     this.venue = this.$route.params.venue;
     this.district = this.$route.params.district;
     //return comment here
-    const cmRef = db.collection("comment");
-    cmRef
-      .where("eventID", "==", this.id)
-      .get()
-      .then(querySnapshot => {
-        let comment = [];
-        querySnapshot.docs.forEach(function(doc) {
-          // console.log("hi")
-          //   console.log("Test: " + doc.data()[field] + field + keyword);
+    
+    // const cmRef = db.collection("comment");
+    // cmRef
+    //   .orderBy("timestamp")
+    //   .where("eventID", "==", this.id)
+    //   .get()
+    //   .then(querySnapshot => {
+    //     let comment = [];
+    //     querySnapshot.docs.forEach(function(doc) {
+    //       // console.log("hi")
+    //       //   console.log("Test: " + doc.data()[field] + field + keyword);
 
-          //   if (doc.data()[eventI]) {
-          // console.log("---- " + doc.data()[field].indexOf(keyword) + " ----");
-            console.log(doc.data()["timestamp"])
-          comment.push(doc.data());
-          //   }
-        });
-        this.items = comment;
-      });
+    //       //   if (doc.data()[eventI]) {
+    //       // console.log("---- " + doc.data()[field].indexOf(keyword) + " ----");
+    //         console.log(doc.data())
+    //       comment.push(doc.data());
+    //       //   }
+    //     });
+    //     this.items = comment;
+    //   });
 
   },
   methods: {
@@ -126,6 +134,7 @@ export default {
         console.log("no comment");
         alert("Cannot leave empty comment");
       } else {
+        this.btnDisable = true;
         let username = "";
         let eventID = this.$route.params.id;
         const currentUser = firebase.auth().currentUser;
@@ -137,7 +146,8 @@ export default {
           .get()
           .then(querySnapshot => {
             username = querySnapshot.docs[0].data().username;
-
+            var timestamp = firebase.firestore.FieldValue.serverTimestamp()
+            console.log(timestamp)
             var today = new Date();
             var dd = today.getDate();
             var mm = today.getMonth() + 1; //January is 0!
@@ -170,14 +180,17 @@ export default {
                 eventID +
                 " CM: " +
                 cm +
-                " time: " +
-                today
+                " timestamp: " +
+                timestamp +
+                " datetime: " +
+                today 
             );
 
             const cmRef = db.collection("comment");
 
             let tempCM = {
               username: username,
+              timestamp: timestamp,
               datetime: today,
               eventID: eventID,
               comment: cm
@@ -186,30 +199,31 @@ export default {
             cmRef.add(tempCM).then(docRef => {
               console.log(tempCM);
               console.log("New Comment Added.");
-              this.update();
+              // this.update();
               this.inputComment = ""
+              this.btnDisable = false;
             });
           });
       }
     },
-    update: function() {
-      const cmRef = db.collection("comment");
-      cmRef
-        .orderBy("date", 'desc')
-        .where("eventID", "==", this.id)
-        .get()
-        .then(querySnapshot => {
-          let comment = [];
-          querySnapshot.docs.forEach(function(doc) {
+    // update: function() {
+    //   const cmRef = db.collection("comment");
+    //   cmRef
+    //     .orderBy("timestamp")
+    //     .where("eventID", "==", this.id)
+    //     .get()
+    //     .then(querySnapshot => {
+    //       let comment = [];
+    //       querySnapshot.docs.forEach(function(doc) {
             
-            // doc.data().timestamp = doc.data().timestamp.toDate()
-            // console.log(doc.data().timestamp.toDate().toString())
-            comment.push(doc.data());
+    //         // doc.data().timestamp = doc.data().timestamp.toDate()
+    //         // console.log(doc.data().timestamp.toDate().toString())
+    //         comment.push(doc.data());
             
-          });
-          this.items = comment;
-        });
-    },
+    //       });
+    //       this.items = comment;
+    //     });
+    // },
     addFav: function() {
         const currentUser = firebase.auth().currentUser;
         
