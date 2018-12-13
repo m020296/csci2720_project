@@ -12,10 +12,11 @@ app.use(bodyParser.json());
 var admin = require('firebase-admin');
 var serviceAccount = require('./serviceAccountKey.json');
 var serviceAccount_backup = require('./serviceAccountKey_backup.json');
+var serviceAccount_backup2 = require('./serviceAccountKey_backup2.json');
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount_backup),
-  databaseURL: 'https://project2720-eafa3.firebaseio.com'
+  credential: admin.credential.cert(serviceAccount_backup2),
+  databaseURL: 'https://back2-2f39f.firebaseio.com'
 });
 
 app.get('/listUsers', function(req,res) {
