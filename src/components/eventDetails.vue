@@ -4,10 +4,7 @@
     <v-flex xs12 sm8>
       <v-card>
         <v-img src="https://cdn.vuetifyjs.com/images/cards/desert.jpg" aspect-ratio="2.75"></v-img>
-
-        <v-card-title primary-title>
-          <div>
-            <v-layout row wrap text-xs-center>
+        <v-layout row wrap text-xs-center>
               <v-flex xs12 sm6>
                 <v-btn flat color="indigo" @click="backPre">Back</v-btn>
               </v-flex>
@@ -16,9 +13,11 @@
                   <v-icon>star</v-icon> Add to favourite
                 </v-btn>
               </v-flex>
-            </v-layout>
-            <v-divider ></v-divider>
+        </v-layout>
         <v-divider ></v-divider>
+        <v-card-title primary-title>
+          <div>
+            
             <h2>{{title}}</h2><br>
             <div>
               <br>
