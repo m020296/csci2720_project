@@ -34,7 +34,7 @@
     </v-toolbar>
 
     <v-content id="userContent" >
-      <v-container fluid fill-height align-center>
+      <v-container>
         <!--<component v-bind:is="component"></component>-->
         <router-view></router-view>
       </v-container>
