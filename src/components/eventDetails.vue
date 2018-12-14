@@ -9,8 +9,8 @@
                 <v-btn flat color="indigo" @click="backPre">Back</v-btn>
               </v-flex>
               <v-flex xs12 sm6>
-                <v-btn flat color="primary" @click="addFav">
-                  <v-icon>star</v-icon> Add to favourite
+                <v-btn flat color="primary" @click="state ? addFav() : delFav()">
+                  <v-icon>{{this.buttonIcon}}</v-icon> {{this.buttonStatment}}
                 </v-btn>
               </v-flex>
         </v-layout>
@@ -89,7 +89,10 @@ export default {
     venue: "",
     district: "",
     favEvent: [],
-    btnDisable: false
+    btnDisable: false,
+    buttonStatment: "",
+    buttonIcon: "",
+    state: true
   }),
   firestore () {
     return {
@@ -103,6 +106,30 @@ export default {
     this.organization = this.$route.params.organization;
     this.venue = this.$route.params.venue;
     this.district = this.$route.params.district;
+    //check this page is in fav or not
+
+    const currentUser = firebase.auth().currentUser;
+    db.collection("user").doc(currentUser.uid).get().then((data) => {
+            //console.log(data.data());
+            const ref = data.data();
+            this.favEvent = ref.favEvents;
+            console.log(this.favEvent);
+            if(!this.favEvent.includes(this.id)){
+              this.buttonIcon = "star";
+              this.buttonStatment = "Add to favourite";
+              //assign the addFav to id="favBtn"
+            }else{
+              this.buttonIcon = "delete";
+              this.buttonStatment = "Delete this favourite";
+              //assign the addFav to id="favBtn"
+              this.state = !this.state;
+            }
+    });
+
+
+
+
+
     //return comment here
     
     // const cmRef = db.collection("comment");
@@ -238,11 +265,31 @@ export default {
                     favEvents: this.favEvent
                 })
                 alert("This event is added to your favourite.")
-            }else{
-                alert("This event is already in your favourite list.")
             }
+            console.log(this.favEvent);
+            this.buttonIcon = "delete";
+            this.buttonStatment = "Delete this favourite";
+            //assign the addFav to id="favBtn"
+            this.state = !this.state;
         })
         
+    },
+    delFav: function() {
+      const currentUser = firebase.auth().currentUser;
+      const valueToRemove = this.id;
+      const filteredItems = this.favEvent.filter(function(item) {
+        return  item !== valueToRemove
+      })
+      db.collection('user').doc(currentUser.uid).update({
+        favEvents: filteredItems
+      })
+      this.favEvent = filteredItems;
+      console.log(this.favEvent);
+      this.buttonIcon = "star";
+      this.buttonStatment = "Add to favourite";
+      //assign the addFav to id="favBtn"
+      this.state = !this.state;
+      alert("This event is removed from your favourite")
     },
     backPre: function() {
       window.history.go(-1);
