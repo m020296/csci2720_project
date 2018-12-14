@@ -4,17 +4,17 @@
   
 ## Project Requirement
 
-### User (So Hon Chuen, Shum Hiu Tung)
+### User (So Hon Chuen, Shum Hiu Tung) - done
 | Requirement | Progress |
 |--|--|
 | 1. SignUp + Login | Need testing |
 | 2. List event in table (allow sorting) | Need testing |
 | 3. Search by one field | Need testing |
-| 4. Separate view of a event: detail + comment(non-threaded) | **Need Fix**(comment orderby time) |
-| 5. Add event to favourite + see list in another view |  |
+| 4. Separate view of a event: detail + comment(non-threaded) | Need testing |
+| 5. Add event to favourite + see list in another view | Need testing |
 | 6. See user name in top right corner + Logout | Need testing |
 
-### Admin (Suen Ka Leong, Shum Hiu Tung)
+### Admin (Suen Ka Leong, Shum Hiu Tung) - done
 | Requirement | Progress |
 |--|--|
 | 1. Flush Data | Need testing |
@@ -23,7 +23,7 @@
 | 4. Load CSV | Need testing |
 | 5. Logout | Need testing |
 
-### Non-user (Shum Hiu Tung)
+### Non-user (Shum Hiu Tung) - done
 | Requirement | Progress |
 |--|--|
 | 1. Login + SignUp | Need testing |
