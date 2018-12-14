@@ -341,7 +341,9 @@ export default {
           ) {
             console.log(vm.editedItem.username + " exists!");
             alert("This username exist! Update fail.");
-            vm.close();
+            // vm.close();
+            vm.btnDisable = false;
+            vm.editedItem.password = "";
           } else {
             console.log(vm.editedItem.username + " not exists / equal to ori");
             console.log(vm.editedItem);
@@ -378,6 +380,8 @@ export default {
                 } else {
                   console.log("node js resopnse error, " + response.data.msg);
                   alert("Update User Error! " + response.data.msg);
+                  vm.btnDisable = false;
+                  vm.editedItem.password = "";
                 }
               });
           }
@@ -394,7 +398,9 @@ export default {
           if (!docSnapshot.empty) {
             console.log(vm.editedItem.username + " exists!");
             alert("This username exist! Create fail.");
-            vm.close();
+            // vm.close();
+            vm.btnDisable = false;
+            vm.editedItem.password = "";
           } else {
             console.log(vm.editedItem.username + " not exists");
             console.log(vm.editedItem);
@@ -431,6 +437,8 @@ export default {
                 } else {
                   console.log("node js resopnse error, " + response.data.msg);
                   alert("Create User Error! " + response.data.msg);
+                  vm.btnDisable = false;
+                  vm.editedItem.password = "";
                 }
               });
           }
