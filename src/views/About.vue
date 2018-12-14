@@ -67,43 +67,50 @@
                 <v-card-text>
 
         <h3>2. Basic “how-to” of your project app</h3><hr>
-        <h5>## Project setup</h5>
-        ```<br>
+        <h5>Project setup</h5>
+        <pre class="code">  $npm install</pre>
+        <!-- ```<br>
         npm install<br>
-        ```<br>
+        ```<br> -->
 
-        <h4>## 1. Vue.js Part:</h4>
+        <h4>1. Vue.js Part:</h4>
 
-        <h5>### Compiles and hot-reloads for development</h5>
-        ```<br>
+        <h5>Compiles and hot-reloads for development</h5>
+        <pre class="code">  $npm run serve</pre>
+        <!-- ```<br>
         npm run serve<br>
-        ```<br>
-        <h5>### Compiles and minifies for production</h5>
-        ```<br>
+        ```<br> -->
+        <h5>Compiles and minifies for production</h5>
+        <pre class="code">  $npm run build</pre>
+        <!-- ```<br>
         npm run build<br>
-        ```<br>
+        ```<br> -->
 
-        <h5>### Run your tests</h5>
-        ```<br>
+        <h5>Run your tests</h5>
+        <pre class="code">  $npm run test</pre>
+        <!-- ```<br>
         npm run test<br>
-        ```<br>
-        <h5>### Lints and fixes files</h5>
-        ```<br>
+        ```<br> -->
+        <h5>Lints and fixes files</h5>
+        <pre class="code">  $npm run lint</pre>
+        <!-- ```<br>
         npm run lint<br>
-        ```<br>
+        ```<br> -->
 
-        <h5>### Customize configuration</h5>
+        <h5>Customize configuration</h5>
         See [Configuration Reference](https://cli.vuejs.org/config/).<br><br>
 
-        <h4>## 2. Node.js Part:</h4>
-        <h5>### run</h5>
-        ```<br>
+        <h4>2. Node.js Part:</h4>
+        <h5>run</h5>
+        <pre class="code">  $node server/server.js</pre>
+        <!-- ```<br>
         node server/server.js<br>
-        ```<br>
-        <h5>### hot-reloads</h5>
-        ```<br>
+        ```<br> -->
+        <h5>hot-reloads</h5>
+        <pre class="code">  $nodemon server/server.js</pre>
+        <!-- ```<br>
         nodemon server/server.js<br>
-        ```<br>
+        ```<br> -->
 </v-card-text></v-card></v-flex>
 <v-flex xs12 sm12 md12 text-xs-left ma-3>
             <v-card class="elevation-12">
@@ -167,5 +174,11 @@ th, td {
   min-width: 120px;
   padding: 10px 20px;
 } */
+
+.code{
+  padding: 10px 0px;
+  background-color: black;
+  color: white
+}
 
 </style>
