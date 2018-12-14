@@ -101,11 +101,16 @@ export default {
   },
   created() {
     this.id = this.$route.params.id;
-    this.title = this.$route.params.title;
-    this.datetime = this.$route.params.datetime;
-    this.organization = this.$route.params.organization;
-    this.venue = this.$route.params.venue;
-    this.district = this.$route.params.district;
+    db.collection("event").doc(this.id).get().then((data) => {
+            console.log(data.data());
+            const ref = data.data();
+            this.title = ref.title;
+            this.datetime = ref.datetime;
+            this.organization = ref.organization;
+            this.venue = ref.venue;
+            this.district = ref.district;
+    });
+    
     //check this page is in fav or not
 
     const currentUser = firebase.auth().currentUser;

@@ -64,7 +64,7 @@ const router = new Router({
           component: EventList, 
         },
         {
-          path: '/events/:id/:title/:datetime/:organization/:venue/:district',
+          path: '/events/:id',
           name: 'eventDetail',
           component: EventDetails,
           props: true   
