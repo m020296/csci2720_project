@@ -1,3 +1,6 @@
+// Shum Hiu Tung (1155063707)
+// Suen Ka Leong (1155062592)
+// So Hon Chuen (1155062753)
 import Vue from "vue";
 import "./plugins/vuetify";
 import firebase from "firebase/app";
@@ -11,6 +14,7 @@ import VeeValidate from 'vee-validate';
 Vue.use(VueFire);
 Vue.use(axios);
 Vue.use(VeeValidate);
+
 
 // var config = {
 //   apiKey: "AIzaSyBIjnXNtVGp_4K4wBKC4I3bF9uj17n0WfM",

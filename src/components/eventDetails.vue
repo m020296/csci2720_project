@@ -1,4 +1,7 @@
 <template>
+<!-- Shum Hiu Tung (1155063707)
+Suen Ka Leong (1155062592)
+So Hon Chuen (1155062753) -->
   <v-content>
   <v-layout align-start justify-center>
     <v-flex xs12 sm8>

@@ -1,3 +1,6 @@
+// Shum Hiu Tung (1155063707)
+// Suen Ka Leong (1155062592)
+// So Hon Chuen (1155062753)
 import Vue from 'vue'
 import Router from 'vue-router'
 import firebase from 'firebase'
